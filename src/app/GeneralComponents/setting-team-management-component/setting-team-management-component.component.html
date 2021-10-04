@@ -1,0 +1,237 @@
+<div style="background-color: white; height: 120px" class="px-lg-5 px-md-3 ">
+  <div class="content-header mx-lg-3">
+    <div class="d-flex mb-2 ">
+      <a class="breadcrumb-item" routerLink="/settings">Settings</a>
+      <a class="breadcrumb-pointer"> ></a>
+      <a class="breadcrumb-pointer">Staff Management</a></div>
+    <h2>Staff Management</h2>
+  </div>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate" color="primary"
+                  style="position: sticky; top: 0; z-index: 100"></mat-progress-bar>
+<div class="wide-content" role="main">
+  <mat-card style="padding: 40px">
+    <div class=" row mb-1">
+      <div class="col-md-9 col-sm-12">
+        <mat-form-field class="w-100 h-75" appearance="outline">
+          <mat-icon matPrefix>
+            search
+          </mat-icon>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3 col-sm-12 d-flex justify-content-end">
+        <button mat-raised-button (click)="isAddUserOpen = true"
+                style="width:100%; height: 50px; margin-top: 5px" color="primary">
+          Add new User
+        </button>
+      </div>
+    </div>
+    <div>
+      <div style=" overflow-x: scroll;">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="Username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username</th>
+            <td mat-cell *matCellDef="let element"> {{element.username}}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Role</th>
+            <td mat-cell *matCellDef="let element"> {{element.access.name}}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <div>
+                <button mat-icon-button class="w-auto" [matMenuTriggerFor]="menu" aria-label="Edit User Actions">
+                  <mat-icon inline class="mx-1">settings</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon style="font-size:1.2em; text-align: center" class="align-items-center">edit</mat-icon>
+                    <span class="menu-span">Edit</span>
+                  </button>
+                  <button mat-menu-item style="color: red; margin-top: 2px"
+                          (click)="openConfirmationDialog(element.id, element.username)">
+                    <mat-icon style="font-size:1.3em; color: red" class="align-items-center">delete</mat-icon>
+                    <span class="menu-span">Delete</span>
+                  </button>
+                </mat-menu>
+              </div>
+
+            </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Organization">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Role</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-label class="top-label">Status</mat-label>
+              <mat-form-field appearance="outline">
+                <mat-select style="height: 0">
+                  <mat-option value="primary">Checked In</mat-option>
+                  <mat-option value="accent">Registered</mat-option>
+                  <mat-option value="warn">Preregistered</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              [class.demo-row-is-clicked]="isUserRowSelected(row)"
+              (click)="editUser(row)"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </mat-card>
+  <div>
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav style="max-width: 400px; width: 100%; !important; margin-top: 65px" #drawer class="sidenav"
+                   position="end"
+                   fixedInViewport
+                   mode="push"
+                   [opened]="isAddUserOpen">
+
+        <div class="content  p-4">
+          <div class="w-100 justify-content-end d-flex">
+            <a>
+              <mat-icon style="cursor: pointer" (click)="CloseAddUser()">close</mat-icon>
+            </a>
+          </div>
+          <div><h4 class="ml-2"><span *ngIf="!newUser.id">Create User</span>
+            <span *ngIf="newUser.id">Update User</span></h4>
+
+          </div>
+          <form (ngSubmit)="registerForm.valid && onSubmit()" #registerForm='ngForm' appPasswordMatchValidation>
+            <div class="mt-2 w-100">
+              <div class="w-100">
+                <mat-label class="top-label">Name</mat-label>
+                <mat-form-field  appearance="standard">
+                  <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">
+                    badgename
+                  </mat-icon>
+                  <input matInput #name="ngModel" required name="name" [(ngModel)]="newUser.name">
+                  <mat-hint *ngIf="(name.invalid && (name.dirty || name.touched)) && name.errors?.required">
+                    Name is required.
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="w-100">
+                <mat-label class="top-label">Username</mat-label>
+                <mat-form-field appearance="standard">
+                  <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">
+                    account_circle
+                  </mat-icon>
+                  <input matInput #username="ngModel" minlength="6" required name="username"
+                         [(ngModel)]="newUser.username">
+                  <mat-hint
+                    *ngIf="(username.invalid && (username.dirty || username.touched)) && username.errors?.minlength">
+                    Username must be at least 6 characters long.
+                  </mat-hint>
+                  <mat-hint
+                    *ngIf="(username.invalid && (username.dirty || username.touched)) && username.errors?.required">
+                    Username is required.
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            <div class="w-100">
+              <mat-label class="top-label">Email</mat-label>
+              <mat-form-field appearance="standard" *ngIf="!newUser.id || newUser.id===currentUserId ">
+                <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">email
+                </mat-icon>
+                <input matInput #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email"
+                       name="email" [(ngModel)]="newUser.email">
+                <mat-hint *ngIf="(email.invalid && (email.dirty || email.touched)) && email.errors?.pattern">
+                  Email is not valid.
+                </mat-hint>
+                <mat-hint *ngIf="(email.invalid && (email.dirty || email.touched)) && email.errors?.required">
+                  Email is required.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+             <div class="w-100">
+               <mat-label class="top-label">Password</mat-label>
+               <mat-form-field appearance="standard" *ngIf="!newUser.id">
+                 <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">lock
+                 </mat-icon>
+                 <input type="password" #password="ngModel" matInput required name="password"
+                        [(ngModel)]="newUser.password">
+                 <mat-hint
+                   *ngIf="(password.invalid && (password.dirty || password.touched)) && password.errors?.required">
+                   Email is required.
+                 </mat-hint>
+               </mat-form-field>
+             </div>
+              <div class="w-100">
+                <mat-label class="top-label">Confirm Password</mat-label>
+                <mat-form-field appearance="standard" *ngIf="!newUser.id">
+                  <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">lock
+                  </mat-icon>
+                  <input type="password" #confirmPassword='ngModel' appPasswordMatchValidation matInput required
+                         name="confirmPassword" [(ngModel)]="newUser.confirmPassword">
+                  <mat-hint
+                    *ngIf="registerForm.errors?.passwordDontMatch && (confirmPassword.touched || confirmPassword.dirty)">
+                    Passwords do not match
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+             <div class="w-100">
+               <mat-label class="top-label">Phone Number</mat-label>
+               <mat-form-field appearance="standard">
+                 <span matPrefix>+251&nbsp;</span>
+                 <input type="tel" pattern="^[1-9]\d*$" matInput #phoneNumber='ngModel' name="phoneNumber"
+                        [(ngModel)]="newUser.phoneNumber">
+                 <mat-hint
+                   *ngIf="!((phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)) && phoneNumber.errors?.pattern)">
+                   Optional
+                 </mat-hint>
+                 <mat-hint
+                   *ngIf="(phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)) && phoneNumber.errors?.pattern">
+                   Phone number can only contain numbers.
+                 </mat-hint>
+               </mat-form-field>
+             </div>
+            </div>
+            <div>
+              <mat-label class="top-label">Access Level</mat-label>
+<!--              <mat-form-field appearance="outline" class="w-100 mt-4" >-->
+<!--                <mat-select [value]="newUser.access.id" (selectionChange)="selectedAccessLevel"-->
+<!--                            (selectionChange)="selectedAccessLevel = $event.value;">-->
+<!--                  <mat-option *ngFor="let accessLevel of accessList;" value="{{accessLevel.id}}">-->
+<!--                    {{accessLevel.name}}</mat-option>-->
+<!--                </mat-select>-->
+<!--              </mat-form-field>-->
+            </div>
+            <div class="mt-5  w-100 justify-content-end d-flex">
+              <button type="submit" mat-raised-button style="margin-bottom: 40px"
+                      color="primary">
+                <span *ngIf="!newUser.id">Create User</span>
+                <span *ngIf="newUser.id">Update User</span>
+              </button>
+
+            </div>
+          </form>
+
+
+        </div>
+
+      </mat-sidenav>
+
+    </mat-sidenav-container>
+  </div>
+</div>
+

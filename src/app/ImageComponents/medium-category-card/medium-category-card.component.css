@@ -1,0 +1,35 @@
+.mat-card {
+  cursor: pointer;
+  background-color: #1b1d1e;
+}
+.image-holder {
+  width: 100%;
+  height: 30vh;
+  position:relative;
+  border-radius: 20px;
+}
+.image-holder:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all .3s linear;
+}
+.container-c {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container-c img {vertical-align: middle;}
+
+.local-content {
+  position: absolute;
+  top: 0;
+  color: #f1f1f1;
+  width: 100%;
+  padding: 5px;
+}

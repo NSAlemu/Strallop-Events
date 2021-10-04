@@ -1,0 +1,43 @@
+::placeholder {
+  color: #b0b0b0;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #b0b0b0;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #b0b0b0;
+}
+::ng-deep .filter  {
+  background: green;
+}
+
+::ng-deep .filter.mat-focused .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .filter input {
+  caret-color: white;
+}
+
+.login-container {
+  display: flex;
+  height: 100%;
+  margin: 0 auto 0;
+  flex-direction: column;
+}
+mat-card{
+  margin: 0;
+  background-color: #FCFCFC;
+
+}
+
+mat-form-field{
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: #414042;
+  border-radius: 5px;
+}
+

@@ -1,0 +1,68 @@
+<mat-toolbar color="primary" class="mat-elevation-z2" style="position: fixed;
+padding-right: 0 !important;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    background-color: black;
+    height: 65px;
+    z-index: 1000;">
+
+  <img routerLink="/" style="z-index:1000;cursor: pointer; height: 25px; width: auto" src="assets/logo.png"
+       [style.margin-left]="'30px' ">
+  <a
+    style="z-index:1000;margin-left:10px; font-size: 0.9em;color: white; font-weight: 500; text-decoration: transparent"
+    disableRipple
+    class="d-none d-md-block" routerLink="/">Strallop Events
+  </a>
+  <span class="fullSpacer"></span>
+  <div class="h-100 align-items-center d-flex" style="padding-left:15px;">
+    <div *ngIf="!currentUser" class="mx-3">
+      <a routerLink="/login">
+        <button mat-button color="" style="font-size:0.75em; color: white; font-weight: 500">Sign in</button>
+      </a>
+    </div>
+    <div *ngIf="currentUser">
+      <a routerLink="/m">
+        <button mat-button color="" style="font-size:0.7em; color: white; font-weight: 500">Manage Events</button>
+      </a>
+      <button mat-button class="w-auto px-4" [matMenuTriggerFor]="menu" style="background-color: black"
+              aria-label="Example icon-button with a menu">
+        <div class="d-flex align-items-center justify-content-center ">
+          <mat-icon *ngIf="!currentUserImg  " style="z-index:1000;color:#e7ebef; font-size: 30px; padding: 0" inline>
+            account_circle
+          </mat-icon>
+          <img *ngIf="currentUserImg " src="{{currentUserImg}}" class="my-3"
+               style="z-index:1000;max-height:100%; width: 35px; height: 35px; object-fit: cover; border-radius: 17px">
+
+          <span class="d-none d-md-block"
+                style="z-index:1000;margin-left: 8px;text-align: left;line-height: 14px !important; color: white;
+              font-size: 0.9em;">{{currentUser!.getUsername()}}
+            <br style="">
+            <span
+              style="z-index:1000;color: #e7e7e7; font-size: 0.8em; font-weight: lighter">{{currentUser!.get('name')}}</span></span>
+          <mat-icon inline style="z-index:1000;color: #e7ebef;margin-left: 15px; font-size: 2em">arrow_drop_down
+          </mat-icon>
+        </div>
+
+      </button>
+      <mat-menu #menu="matMenu">
+        <a routerLink="/settings">
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+        </a>
+        <a routerLink="/settings/account">
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Account</span>
+          </button>
+        </a>
+        <button mat-menu-item (click)="logout()" type="button">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
+<mat-divider style="background: rgba(255,183,0,0.2); height: 0.5px"></mat-divider>

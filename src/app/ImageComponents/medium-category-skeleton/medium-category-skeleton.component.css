@@ -1,0 +1,48 @@
+.skeleton-container {
+  height: 225px;
+  background: #313236 linear-gradient(to right, #313236 0%, #37373c 20%, #3b3b41 40%, #313236 60%, #313236 100%) no-repeat;
+  border-radius: 3px;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeHolderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+
+.skeleton-line {
+  height: 12px;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeHolderShimmer;
+  -webkit-animation-timing-function: linear;
+  background: #50535a linear-gradient(to right, #50535a 0%, #656871 20%, #50535a 40%, #50535a 100%) no-repeat;
+  position: relative;
+  border-radius: 1px;
+  margin: 10px 35px 0 0;
+}
+.line-lg{
+  width: 250px;
+}
+.line-md{
+  width: 200px;
+}
+.line-st{
+  width: 175px;
+}
+@keyframes shimmer {
+  0%{
+    background-position: -250px 0;
+  }
+  100%{
+    background-position: 250px 0;
+  }
+}
+@keyframes placeHolderShimmer {
+  0%{
+    background-position: -250px 0;
+  }
+  100%{
+    background-position: 250px 0;
+  }
+}

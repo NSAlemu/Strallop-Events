@@ -1,0 +1,37 @@
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+::ng-deep .mat-form-field-wrapper{
+  padding: 0!important;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix{
+  padding: 0.8em 0 !important;
+}
+.text-white{
+  margin-bottom: 20px;
+}
+::-webkit-scrollbar {
+  background-color: rgba(128,128,128,0.5);
+  width: 10px;
+}
+::-webkit-scrollbar:hover {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+  width:20px;
+}

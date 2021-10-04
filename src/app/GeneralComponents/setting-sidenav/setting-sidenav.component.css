@@ -1,0 +1,43 @@
+p{
+  color: #6f7287;
+  margin-bottom: 0;
+  align-items: center;
+  display: flex;
+  padding-left: 12px !important;
+  font-size: 0.85em !important;
+}
+.mat-expansion-panel-header {
+  background-color: #f8f7fa;
+}
+.mat-expansion-panel{
+  background-color: #ffffff;
+}
+.mat-expansion-panel-header-title{
+  background-color: transparent;
+  color: #6f7287;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.sidenav-container {
+  height: 100%;
+}
+.active-sidenav-link {
+  background-color: #606377 !important;
+}
+.active-sidenav-p{
+  color: white;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}

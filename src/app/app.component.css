@@ -1,0 +1,19 @@
+.footer-link{
+  color: white;
+  font-weight: 600;
+}
+.footer-link:after {
+  content: "●";
+  font-size: 6px;
+  color: #e5e7ec;
+  padding: 0 8px;
+  line-height: 16px;
+  position: relative;
+  top: -2px;
+}
+footer{
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

@@ -1,0 +1,81 @@
+
+::ng-deep .mat-tab-label-content {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label {
+  opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-labels {
+  position: -webkit-sticky; /* Safari & IE */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+::ng-deep .mat-tab-label, ::ng-deep .mat-tab-label-active {
+  min-width: 100px !important;
+  padding: 3px !important;
+  margin: 3px !important;
+}
+
+::ng-deep .mat-tab-body-content {
+  overflow-x: hidden !important;
+}
+
+.fixed-top {
+  z-index: 1000;
+}
+
+::ng-deep .mat-tab-header-pagination.mat-tab-header-pagination-disabled {
+  display: none !important;
+}
+
+::ng-deep .mat-tab-header-pagination-chevron {
+  border-color: white;
+}
+
+.row {
+  margin-top: 40px;
+}
+
+.image-holder {
+  width: 90vw;
+  height: 45vh;
+  position: relative;
+  border-radius: 15px;
+}
+
+.image-holder:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all .3s linear;
+}
+
+.container-c {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container-c img {
+  vertical-align: middle;
+}
+
+.local-content {
+  position: absolute;
+  top: 0;
+  color: #f1f1f1;
+  width: 100%;
+  padding-top: 25px;
+  padding-left: 30px;
+}
+

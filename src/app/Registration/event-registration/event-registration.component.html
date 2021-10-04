@@ -1,0 +1,298 @@
+<div       style="width: 2000px;max-width: 100%; "class="m-0 wide-content">
+<div *ngIf="loading" class="d-flex align-items-center justify-content-center m-0 h-100">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!loading && !completed" class=" h-100 p-0 m-0 position-relative" >
+    <div class="row w-100 m-0 h-100" style="position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;overflow: hidden">
+      <div class="col-lg-8 col-md-7  px-0 position-relative"
+           style="color: black!important;">
+        <div class="py-lg-4 py-3" style="max-height: calc(100vh - 90px); overflow: auto">
+          <div class="d-flex justify-content-end w-100 px-3 show-close">
+            <mat-icon [mat-dialog-close]>cancel</mat-icon>
+          </div>
+          <div class="px-lg-5 px-3">
+            <h4 class="text-black">{{data.event.name}}</h4>
+            <div style="font-size: 0.8em">
+              <p class="icon-container ev_date_loc m-0 ">
+                <mat-icon inline class="icon-sm">room</mat-icon>
+                Lafto Event Location, Addis Ababa
+              </p>
+              <p class="icon-container ev_date_loc mt-1">
+                <mat-icon inline class="icon-sm">calendar_today</mat-icon>
+                {{data.event.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
+            </div>
+          </div>
+          <div class="my-3">
+            <div class="row mx-0" mat-tab-nav-bar>
+              <mat-divider mat-tab-link [active]="currentStep===getAllRegistrationStepSelection().tickets"
+                           class="col-4 mx-0"
+                           style="position:relative;height: 2px"></mat-divider>
+              <mat-divider mat-tab-link class="col-4 mx-0"
+                           [active]="currentStep===getAllRegistrationStepSelection().registration"
+                           style="position:relative;height: 2px"></mat-divider>
+              <mat-divider mat-tab-link class="col-4 mx-0"
+                           [active]="currentStep===getAllRegistrationStepSelection().purchase"
+                           style="position:relative;height: 2px"></mat-divider>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="px-lg-5  px-3 mb-5" style="overflow-x: hidden;">
+            <div *ngIf="currentStep === getAllRegistrationStepSelection().tickets">
+              <div class="row my-2" *ngFor='let ticket of data.event.tickets ;let i = index'>
+                <div class="col-9 d-flex align-items-center">
+                  <div>
+                    <p class="mb-1" style="font-weight:500;font-size: 1.2em">{{ticket.name}}</p>
+                    <p class="m-0">Br. {{ticket.price}}</p>
+                  </div>
+
+                </div>
+                <div class="col-3">
+                  <mat-form-field required appearance="outline" class="w-100 ">
+                    <mat-select [ngModel]="getTicketMap(ticket.id)" [value]="0"
+                                (selectionChange)="ticketMap.set(ticket.id, $event.value);">
+                      <mat-option *ngFor="let count of counter(ticket.attendeeLimitPerOrder);let i = index" [value]="i">
+                        {{i}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="currentStep === getAllRegistrationStepSelection().registration">
+              <div class=" mb-5" style="overflow-x: hidden;">
+                <div>
+                  <h5 class="mb-3 text-black">Contact Information</h5>
+                  <form #contactForm='ngForm' class="row">
+                    <div class="mb-1 col-12 col-lg-6 col-md-6">
+                      <mat-label class="top-label">First Name</mat-label>
+                      <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                        <input required #firstName="ngModel" [(ngModel)]="contactInfo.firstName" matInput
+                               name="firstName">
+                      </mat-form-field>
+                    </div>
+                    <div class="mb-1 col-12 col-lg-6 col-md-6">
+                      <mat-label class="top-label">Middle Name</mat-label>
+                      <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                        <input required #middleName="ngModel" [(ngModel)]="contactInfo.middleName" matInput
+                               name="middleName">
+                      </mat-form-field>
+                    </div>
+                    <div class="mb-1 col-12 col-lg-9 col-md-9">
+                      <mat-label class="top-label">Last Name</mat-label>
+                      <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
+                        <input required #lastName="ngModel" [(ngModel)]="contactInfo.lastName" matInput name="lastName">
+                      </mat-form-field>
+                    </div>
+                    <div class="mb-1 col-12 col-lg-9 col-md-9">
+                      <mat-label class="top-label">Organization</mat-label>
+                      <mat-form-field class="w-100" appearance="outline">
+                        <input [(ngModel)]="contactInfo.organization" matInput name="organization">
+                      </mat-form-field>
+                    </div>
+                    <div class="mb-1 col-12 col-lg-6 col-md-6">
+                      <mat-label class="top-label">Email</mat-label>
+                      <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                        <input matInput #email="ngModel" [(ngModel)]="contactInfo.email" name="email">
+                      </mat-form-field>
+                    </div>
+                    <div class="mb-1 col-12 col-lg-6 col-md-6">
+                      <mat-label class="top-label">Phone Number</mat-label>
+                      <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
+                        <input required [(ngModel)]="contactInfo.phoneNumber" matInput name="phoneNumber">
+                      </mat-form-field>
+                    </div>
+                  </form>
+                  <form #attendeesForm='ngForm' class="row"  *ngIf="requireEachUser()">
+                    <div *ngFor='let ticketBought of ticketsBought;let i = index'>
+                      <h5 class="mb-3 mt-5 text-black">Attendee {{i+1}} {{ticketBought.ticketType.name}}</h5>
+                      <div class="mb-1 col-12 col-lg-6 col-md-6">
+                        <mat-label class="top-label">First Name</mat-label>
+                        <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                          <input required #firstName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.firstName" matInput
+                                 name="firstName">
+                        </mat-form-field>
+                      </div>
+                      <div class="mb-1 col-12 col-lg-6 col-md-6">
+                        <mat-label class="top-label">Middle Name</mat-label>
+                        <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                          <input required #middleName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.middleName" matInput
+                                 name="middleName">
+                        </mat-form-field>
+                      </div>
+                      <div class="mb-1 col-12 col-lg-9 col-md-9">
+                        <mat-label class="top-label">Last Name</mat-label>
+                        <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
+                          <input required #lastName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.lastName" matInput name="lastName">
+                        </mat-form-field>
+                      </div>
+                      <div class="mb-1 col-12 col-lg-9 col-md-9">
+                        <mat-label class="top-label">Organization</mat-label>
+                        <mat-form-field class="w-100" appearance="outline">
+                          <input [(ngModel)]="ticketBought.attendeeInfo.organization" matInput name="organization">
+                        </mat-form-field>
+                      </div>
+                      <div class="mb-1 col-12 col-lg-6 col-md-6">
+                        <mat-label class="top-label">Email</mat-label>
+                        <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                          <input matInput #email="ngModel" [(ngModel)]="ticketBought.attendeeInfo.email" name="email">
+                        </mat-form-field>
+                      </div>
+                      <div class="mb-1 col-12 col-lg-6 col-md-6">
+                        <mat-label class="top-label">Phone Number</mat-label>
+                        <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
+                          <input required [(ngModel)]="ticketBought.attendeeInfo.phoneNumber" matInput name="phoneNumber">
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div>
+
+            </div>
+          </div>
+        </div>
+        <div class="" style=" position: absolute; bottom: 0; width: 100%;background-color: white">
+          <div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="d-flex align-items-center h-100 mx-3 px-2 py-3">
+            <div class="show-close">
+              <button (click)="panelOpenState=!panelOpenState" mat-icon-button>
+                <mat-icon [matBadge]="getTotalNumberOfTickets()" inline style="color:#595959;font-size: 1.6em">
+                  shopping_cart
+                </mat-icon>
+                <mat-icon style="font-size: 1.3em" *ngIf="panelOpenState">expand_more</mat-icon>
+                <mat-icon style="font-size: 1.3em" *ngIf="!panelOpenState">expand_less</mat-icon>
+              </button>
+
+            </div>
+            <div class="fullSpacer"></div>
+            <div>
+              <button mat-raised-button [disabled]="getTotalNumberOfTickets()===0" color="primary" (click)="setStep()"
+                      class="">Register
+              </button>
+            </div>
+          </div>
+          <mat-accordion class="show-close h-100">
+            <mat-expansion-panel [expanded]="panelOpenState"
+                                 style="position:relative;padding: 0!important;background-color: rgba(0,2,14,0.85);">
+              <div style="height: calc(100vh - 75px);top:0">
+                <div style="padding-bottom:75px;max-height: calc(100vh - 290px); overflow: auto">
+                  <div class="p-4 text-white">
+                    <h4>Order Summary</h4>
+                    <div>
+                      <div class="mt-3">
+                        <div class=" mt-4" *ngFor='let ticket of data.event.tickets;let i = index'>
+                          <div class="d-flex w-100" *ngIf="getTicketMap(ticket.id)>0">
+                            <h6 style="display:inline-block;color: white">{{getTicketMap(ticket.id)}}
+                              x {{ticket.name}}</h6>
+                            <div class="fullSpacer"></div>
+                            <h6 style="display:inline-block;color: white">
+                              Br. {{getTicketMap(ticket.id) * ticket.price}}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-100">
+                  <div
+                    style="width:100%; height: 75px; position: absolute; bottom: 0;color: white; background-color: rgba(0,2,14,0.85);">
+                    <mat-divider style="background:grey!important;"></mat-divider>
+                    <div class="w-100 pb-3 d-flex px-4 h-100 align-items-center">
+                      <div>Total:</div>
+                      <div class="fullSpacer"></div>
+                      <div>Br. {{getTotalTicketPrice()}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+
+
+      <div class="d-none d-md-block col-lg-4 col-md-5 p-0 position-relative"
+           style=" background-color: rgba(0,2,14,0.85);">
+        <div>
+          <img
+            [src]="data.event.coverImage && data.event.coverImage.length>0 ? data.event.coverImage: 'assets/views/event_image_placeholder.png'"
+            style="height:   200px; width: 100%; object-fit: cover;border-radius: 0 4px 0 0;">
+        </div>
+        <div style="padding-bottom:75px;max-height: calc(100vh - 290px); overflow: auto">
+          <div class="p-4 text-white">
+            <h4>Order Summary</h4>
+            <div>
+              <div class="mt-3">
+                <div class=" mt-4" *ngFor='let ticket of data.event.tickets;let i = index'>
+                  <div class="d-flex w-100" *ngIf="getTicketMap(ticket.id)>0">
+                    <h6 style="display:inline-block;color: white">{{getTicketMap(ticket.id)}} x {{ticket.name}}</h6>
+                    <div class="fullSpacer"></div>
+                    <h6 style="display:inline-block;color: white">Br. {{getTicketMap(ticket.id) * ticket.price}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-100">
+          <div
+            style="width:100%; height: 75px; position: absolute; bottom: 0;color: white; background-color: rgba(0,2,14,0.85);">
+            <mat-divider style="background:grey!important;"></mat-divider>
+            <div class="w-100 pb-3 d-flex px-4 h-100 align-items-center">
+              <div>Total:</div>
+              <div class="fullSpacer"></div>
+              <div>Br. {{getTotalTicketPrice()}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="completed" class="wide-content m-0 w-100 position-relative">
+    <div class="d-flex px-lg-5 px-md-4 px-sm-3 px-2 py-4 mt-3" style="color: black!important;">
+      <mat-icon style="margin-top:4px;margin-right:15px;color: green">check_circle</mat-icon>
+     <div class="w-100">
+       <h4><span style="color: black!important;">Thank you for your order! </span></h4>
+       <h6 style="margin-left:5px;color: black!important;">Your order number is #sdf5266</h6>
+     </div>
+    </div>
+    <mat-divider class="px-lg-5 px-md-4 px-sm-3 p-2 w-100"></mat-divider>
+    <div class="px-lg-5 px-md-4 px-sm-3 p-2  overflow-auto" style="height: calc(100vh - 290px)">
+      <p class="m-0 text-black">You are all set for the event</p>
+      <h2 class="mb-5 text-black fw-bold">{{data.event.name}}</h2>
+      <div class="text-black col-lg-8 col-md-10 col-12" style="font-size: 0.8em">ORGANIZER MESSAGE
+        If you gave a donation, thank you for your thoughtfulness.
+
+        Lesson Link: https://qolnow.com/live
+
+        To attend paste the above link into a browser.
+
+        QOL Now is looking forward to seeing you at the Sunday 10AM EST or 7PM EST
+        Tai Chi Basics lesson and Qigong for Health
+
+        Please visit: https://QOLnow.com for more information, videos of previous lessons, and mini-courses on specific forms, such as, the Eight Brocades.</div>
+      <div class="mt-5 row mx-0">
+        <div class=" col-lg-4 col-md-5 col-12">
+          <p class="mb-0 fw-bolder text-black" style="font-size: 1em">{{ticketsBought.length}} sent to</p>
+          <p class="mb-0 text-black" style="font-size: 0.9em">{{contactInfo.email}}nebiyou16@gmail.com</p>
+        </div>
+        <div class=" col-lg-4 col-md-5 col-12">
+          <p class="mb-0 fw-bolder text-black" style="font-size: 1em">Event Starts</p>
+          <p style="font-size: 0.9em"> {{data.event.startDate | date:'EEEE MMMM d, h:mm a'}}</p>
+        </div>
+      </div>
+    </div>
+    <div style="height:50px; position: absolute; bottom: 20px; right: 5vw">
+      <button mat-raised-button color="primary" style="width:150px;height: 50px ">Close</button>
+    </div>
+  </div>
+</div>

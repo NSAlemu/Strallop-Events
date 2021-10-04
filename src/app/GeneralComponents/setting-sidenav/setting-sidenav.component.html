@@ -1,0 +1,33 @@
+<div >
+  <div>
+    <app-toolbar-component [drawer]="drawer"></app-toolbar-component>
+    <mat-sidenav-container class="sidenav-container" >
+      <mat-sidenav #drawer class="sidenav" fixedInViewport
+                   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                   [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                   [opened]="(isHandset$ | async) === false"
+                   style="margin-top: 67px; background-color: #ffffff">
+        <mat-toolbar class="mat-elevation-z1 mb-2">Settings</mat-toolbar>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/settings/staff-management"
+             routerLinkActive="active-sidenav-link">
+            <p routerLinkActive="active-sidenav-p">Staff Management</p></a>
+          <a mat-list-item routerLink="/settings/account"
+             routerLinkActive="active-sidenav-link">
+            <p routerLinkActive="active-sidenav-p">Account</p></a>
+          <a mat-list-item routerLink="/settings/theme"
+             routerLinkActive="active-sidenav-link">
+            <p routerLinkActive="active-sidenav-p">Theme</p></a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content style="max-height: calc(100vh - 67px)">
+        <ng-content></ng-content>
+        <!-- Add Content Here -->
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+
+  </div>
+
+</div>
+

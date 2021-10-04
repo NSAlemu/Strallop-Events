@@ -1,0 +1,90 @@
+<div class="wide-content p-0 m-0" style="width: 2000px;max-width: 100%; ">
+  <div class="row w-100 m-0" style="overflow: hidden">
+    <div class="col-lg-8 col-md-7  px-0 position-relative"
+         style="color: black!important;">
+      <div class="py-lg-4 py-3" style="max-height: calc(100vh - 90px); overflow: auto">
+        <div class="px-lg-5 px-3">
+          <h4 class="text-black">{{data.event.name}}</h4>
+          <div style="font-size: 0.8em">
+            <p class="icon-container ev_date_loc m-0 ">
+              <mat-icon inline class="icon-sm">room</mat-icon>
+              Lafto Event Location, Addis Ababa
+            </p>
+            <p class="icon-container ev_date_loc mt-1">
+              <mat-icon inline class="icon-sm">calendar_today</mat-icon>
+              {{data.event.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
+          </div>
+        </div>
+
+        <mat-divider class="my-3"></mat-divider>
+        <div class="px-lg-5  px-3 mb-5" style="overflow-x: hidden;">
+          <div>
+            <h5 class="mb-3 text-black">Contact Information</h5>
+            <div class="row">
+              <div class="col-12 col-lg-6 col-md-6">
+                <mat-label class="top-label">First Name</mat-label>
+                <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                  <input required matInput name="firstName">
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-6 col-md-6">
+                <mat-label class="top-label">Middle Name</mat-label>
+                <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
+                  <input required matInput name="middleName">
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-9 col-md-9">
+                <mat-label class="top-label">Last Name</mat-label>
+                <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
+                  <input required matInput name="lastName">
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-9 col-md-9">
+                <mat-label class="top-label">Organization</mat-label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input required matInput name="organization">
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-6 col-md-6">
+                <mat-label class="top-label">Email</mat-label>
+                <mat-form-field appearance="outline" style="padding-right: 2px">
+                  <input matInput name="email">
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-6 col-md-6">
+                <mat-label class="top-label">Phone Number</mat-label>
+                <mat-form-field style="padding-left: 2px" appearance="outline">
+                  <input required matInput name="phoneNumber">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="height: 75px; position: absolute; bottom: 0; width: 100%;background-color: white">
+        <mat-divider></mat-divider>
+        <div class="d-flex justify-content-end align-items-center h-100 mx-lg-3">
+          <button mat-raised-button color="primary" [mat-dialog-close]="true" class="">Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-md-block col-lg-4 col-md-5 p-0"
+         style=" background-color: rgba(0,2,14,0.85);max-height: calc(100vh - 90px);overflow: auto">
+      <div>
+        <img src="{{data.event.coverImage}}"
+             style="height:   200px; width: 100%; object-fit: cover;border-radius: 0 4px 0 0;">
+      </div>
+      <div class="p-4 text-white">
+        <h4>Order Summary</h4>
+        <div class="mt-3">
+          <div class="d-flex mt-3" *ngFor='let tickets of counter(10) ;let i = index'>
+            <h6 style="color: white">1 x General Admission</h6>
+            <div class="fullSpacer"></div>
+            <h6 style="color: white">Br. 30.00</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

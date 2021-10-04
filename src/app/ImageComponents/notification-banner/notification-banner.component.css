@@ -1,0 +1,26 @@
+*{
+  color: #1b1d1e!important;
+}
+.banner-background {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 550px;
+  width: 100%;
+  position: absolute;
+  left: 0
+}
+
+.banner-image {
+  padding-left: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+  max-height: 400px;
+  width: 100%;
+  z-index: 500
+}
+
+@media (max-width: 869px) {
+  .banner-image{
+    padding-left: 0;
+  }
+}

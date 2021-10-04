@@ -1,0 +1,6 @@
+.mat-button-focus-overlay{
+  background: transparent !important;
+}
+.mat-button .mat-button-focus-overlay {
+  background-color: transparent;
+}

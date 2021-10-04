@@ -1,0 +1,16 @@
+<div style="background-color: white; padding: 25px">
+  <h3 mat-dialog-title class="align-items-start d-flex">
+    <mat-icon inline class="mx-1" >delete</mat-icon>
+    <span *ngIf="data.header">{{data.header}}</span>
+    <span *ngIf="!data.header">Delete User?</span>
+  </h3>
+  <mat-dialog-content class="mb-3">
+    {{data.message}}
+    <br>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="{confirm:true, id: this.data.id}" cdkFocusInitial>Delete
+    </button>
+  </mat-dialog-actions>
+</div>

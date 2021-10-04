@@ -1,0 +1,31 @@
+<mat-card class="d-flex m-0 justify-content-center p-0 w-100 mt-4 cursor-pointer mat-elevation-z0" appMaterialElevation>
+  <div class="container-c w-100">
+    <div class="image-holder w-100  d-none d-sm-block">
+      <img
+        src="{{carouselItem.coverImage.length>0?carouselItem.coverImage: 'assets/views/event_image_placeholder.png'}}"
+        class="w-100 h-100" style="border-radius: 5px; object-fit: cover">
+    </div>
+    <!--    <div class="local-content d-flex justify-content-end  d-none d-md-block"-->
+    <!--         style=" position: absolute;z-index: 900;">-->
+    <!--      <h6 class="mb-1 px-2 py-2"-->
+    <!--          style="color: #dadcdd; font-size: 9px;background-color:rgba(38,38,38,0.5);border-radius: 12px">-->
+    <!--        {{carouselItem.startDate | date:'EEEE, MMMM d, h:mm a'}}</h6>-->
+    <!--    </div>-->
+    <div class="px-2 py-2 row">
+      <div class="col-lg-auto col-md-auto col-sm-auto col-4 d-block d-sm-none">
+        <img
+          src="{{carouselItem.coverImage.length>0?carouselItem.coverImage: 'assets/views/event_image_placeholder.png'}}"
+          style="width:100px; height:100px; border-radius: 5px; object-fit: cover">
+      </div>
+      <div class="col-lg-auto col-md-auto col-sm-auto col-8" style=" z-index: 500; margin-bottom: 40px">
+        <p class="mb-1 mt-0 mt-lg-2 mt-md-2 mt-sm-1" style="color: white; font-size: 15px;">{{carouselItem.name}}</p>
+        <p
+          style="margin-bottom:5px;color: #6c6cd0; font-size: 12px; font-weight: 400"> {{carouselItem.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
+        <p class=" mb-2" style="color: #ececec; font-size: 13px; font-weight: 400">{{getLocation(carouselItem)}}</p>
+        <p class=" mb-1" style="color: #ececec; font-size: 14px; font-weight: 600">
+          <span style="color: #ececec; font-size: 13px; font-weight: 400">Starting from</span> Br. 25 </p>
+      </div>
+    </div>
+
+  </div>
+</mat-card>

@@ -1,0 +1,33 @@
+li{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 0.9em;
+}
+.mat-form-field-wrapper ng-tns-c115-2 {
+  padding: 0 !important;
+}
+
+.menu-span {
+  font-size: 0.9em;
+}
+
+.mat-menu-item {
+  font-size: 0.9em;
+  line-height: 30px;
+  height: 30px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 14px;
+}
+
+.mat-button-toggle-button {
+  background-color: transparent;
+  border-color: transparent !important;
+}
+.mat-row .mat-cell {
+  cursor: pointer;
+}
+.demo-row-is-clicked{
+  /*font-weight: bold;*/
+  background-color: #f1f1f1;
+}
