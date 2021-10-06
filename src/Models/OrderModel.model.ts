@@ -98,7 +98,7 @@ export class OrderModel {
 
   static async purchase(ticketsBought: {ticketType:TicketWebInterface, attendeeInfo:PersonalInformationInterface}[],
                         contactInfo: PersonalInformationInterface,  eventId:string) {
-    console.log(ticketsBought,'\n\n\n', contactInfo)
+    return await Parse.Cloud.run("purchaseTickets", {eventId, contactInfo, ticketsBought})
   }
   static async toParse(statusId: string, selectedTicketTypeId: string, attendeeInfo: PersonalInformationInterface) {
     const orderedTicketObject = new (Parse.Object.extend('TicketOrder'))();

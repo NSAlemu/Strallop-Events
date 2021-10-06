@@ -82,13 +82,13 @@ import { PrivacyComponent } from './GeneralComponents/privacy/privacy.component'
 // (Parse as any).serverURL = "https://parseapi.back4app.com/";
 
 Parse.initialize('APPLICATION_ID');
-// (Parse as any).serverURL = 'http://localhost:1337/parse';
-// // @ts-ignore
-// Parse.liveQueryServerURL = 'ws://localhost:1337/';
-
-(Parse as any).serverURL = 'https://fichach-parse.herokuapp.com/parse';
+(Parse as any).serverURL = 'http://localhost:1337/parse';
 // @ts-ignore
-Parse.liveQueryServerURL = 'wss://fichach-parse.herokuapp.com/';
+Parse.liveQueryServerURL = 'ws://localhost:1337/';
+
+// (Parse as any).serverURL = 'https://fichach-parse.herokuapp.com/parse';
+// // @ts-ignore
+// Parse.liveQueryServerURL = 'wss://fichach-parse.herokuapp.com/';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},

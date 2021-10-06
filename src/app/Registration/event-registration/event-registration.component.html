@@ -1,8 +1,8 @@
-<div       style="width: 2000px;max-width: 100%; "class="m-0 wide-content">
-<div *ngIf="loading" class="d-flex align-items-center justify-content-center m-0 h-100">
+<div style="width: 2000px;max-width: 100%; " class="m-0">
+  <div *ngIf="loading" class="wide-content d-flex align-items-center justify-content-center m-0 h-100">
     <mat-spinner></mat-spinner>
   </div>
-  <div *ngIf="!loading && !completed" class=" h-100 p-0 m-0 position-relative" >
+  <div *ngIf="!loading && !completed" class="wide-content h-100 p-0 m-0 position-relative">
     <div class="row w-100 m-0 h-100" style="position: absolute;
   top: 0;
   left: 0;
@@ -106,27 +106,30 @@
                       </mat-form-field>
                     </div>
                   </form>
-                  <form #attendeesForm='ngForm' class="row"  *ngIf="requireEachUser()">
+                  <form #attendeesForm='ngForm' class="row" *ngIf="requireEachUser()">
                     <div *ngFor='let ticketBought of ticketsBought;let i = index'>
-                      <h5 class="mb-3 mt-5 text-black">Attendee {{i+1}} {{ticketBought.ticketType.name}}</h5>
+                      <h5 class="mb-3 mt-5 text-black">Attendee {{i + 1}} {{ticketBought.ticketType.name}}</h5>
                       <div class="mb-1 col-12 col-lg-6 col-md-6">
                         <mat-label class="top-label">First Name</mat-label>
                         <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
-                          <input required #firstName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.firstName" matInput
+                          <input required #firstName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.firstName"
+                                 matInput
                                  name="firstName">
                         </mat-form-field>
                       </div>
                       <div class="mb-1 col-12 col-lg-6 col-md-6">
                         <mat-label class="top-label">Middle Name</mat-label>
                         <mat-form-field class="w-100" appearance="outline" style="padding-right: 2px">
-                          <input required #middleName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.middleName" matInput
+                          <input required #middleName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.middleName"
+                                 matInput
                                  name="middleName">
                         </mat-form-field>
                       </div>
                       <div class="mb-1 col-12 col-lg-9 col-md-9">
                         <mat-label class="top-label">Last Name</mat-label>
                         <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
-                          <input required #lastName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.lastName" matInput name="lastName">
+                          <input required #lastName="ngModel" [(ngModel)]="ticketBought.attendeeInfo.lastName" matInput
+                                 name="lastName">
                         </mat-form-field>
                       </div>
                       <div class="mb-1 col-12 col-lg-9 col-md-9">
@@ -144,7 +147,8 @@
                       <div class="mb-1 col-12 col-lg-6 col-md-6">
                         <mat-label class="top-label">Phone Number</mat-label>
                         <mat-form-field class="w-100" style="padding-left: 2px" appearance="outline">
-                          <input required [(ngModel)]="ticketBought.attendeeInfo.phoneNumber" matInput name="phoneNumber">
+                          <input required [(ngModel)]="ticketBought.attendeeInfo.phoneNumber" matInput
+                                 name="phoneNumber">
                         </mat-form-field>
                       </div>
 
@@ -260,10 +264,11 @@
   <div *ngIf="completed" class="wide-content m-0 w-100 position-relative">
     <div class="d-flex px-lg-5 px-md-4 px-sm-3 px-2 py-4 mt-3" style="color: black!important;">
       <mat-icon style="margin-top:4px;margin-right:15px;color: green">check_circle</mat-icon>
-     <div class="w-100">
-       <h4><span style="color: black!important;">Thank you for your order! </span></h4>
-       <h6 style="margin-left:5px;color: black!important;">Your order number is #sdf5266</h6>
-     </div>
+      <div class="w-100">
+        <h4><span style="color: black!important;">Thank you for your order! </span></h4>
+        <h6 style="margin-left:5px;color: black!important;">You will receive a confirmation email with your order
+          details</h6>
+      </div>
     </div>
     <mat-divider class="px-lg-5 px-md-4 px-sm-3 p-2 w-100"></mat-divider>
     <div class="px-lg-5 px-md-4 px-sm-3 p-2  overflow-auto" style="height: calc(100vh - 290px)">
@@ -279,15 +284,32 @@
         QOL Now is looking forward to seeing you at the Sunday 10AM EST or 7PM EST
         Tai Chi Basics lesson and Qigong for Health
 
-        Please visit: https://QOLnow.com for more information, videos of previous lessons, and mini-courses on specific forms, such as, the Eight Brocades.</div>
+        Please visit: https://QOLnow.com for more information, videos of previous lessons, and mini-courses on specific
+        forms, such as, the Eight Brocades.
+      </div>
       <div class="mt-5 row mx-0">
-        <div class=" col-lg-4 col-md-5 col-12">
-          <p class="mb-0 fw-bolder text-black" style="font-size: 1em">{{ticketsBought.length}} sent to</p>
-          <p class="mb-0 text-black" style="font-size: 0.9em">{{contactInfo.email}}nebiyou16@gmail.com</p>
+        <div class=" col-lg-4 col-md-5 col-12 p-0">
+          <div class="d-flex ">
+            <div class="mx-2">
+              <mat-icon style="color: #1bbd1b">email</mat-icon>
+            </div>
+            <div class="w-100">
+              <p class="mb-0 fw-bolder text-black" style="font-size: 0.9em">Confirmation Email sent to</p>
+              <p class="mb-0 text-black" style="font-size: 0.8em">{{contactInfo.email}}</p>
+            </div>
+          </div>
         </div>
-        <div class=" col-lg-4 col-md-5 col-12">
-          <p class="mb-0 fw-bolder text-black" style="font-size: 1em">Event Starts</p>
-          <p style="font-size: 0.9em"> {{data.event.startDate | date:'EEEE MMMM d, h:mm a'}}</p>
+        <div class=" col-lg-4 col-md-5 col-12 p-0">
+          <div class="d-flex ">
+            <div class="mx-2">
+              <mat-icon style="color: #1bbd1b">event</mat-icon>
+            </div>
+            <div class="w-100">
+              <p class="mb-0 fw-bolder text-black" style="font-size: 0.9em">Event Details</p>
+              <p style="font-size: 0.8em"> {{data.event.startDate | date:'EEEE MMMM d, h:mm a'}}</p>
+              <p style="font-size: 0.8em"> {{getAddress(data.event.address)}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -4,13 +4,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import * as Parse from "parse";
 import {EventInterface, EventModel, EventWebInterface, TicketWebInterface} from "../../../Models/EventsModel.model";
-import {ErrorCatcher} from "../../Util/shared";
+import {ErrorCatcher, FormatAddress} from "../../Util/shared";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {PersonalInformationInterface} from "../../../Models/PersonalInformationModel";
 import {NgForm} from "@angular/forms";
 import {OrderModel} from "../../../Models/OrderModel.model";
 import {AddressInterface} from "../../../Models/Address.model";
 import {TicketTypeInterface} from "../../../Models/TicketType.model";
+import {addWarning} from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
 
 @Component({
   selector: 'app-event-registration',
@@ -29,10 +30,10 @@ export class EventRegistrationComponent implements OnInit {
       address1: '', address2: '', name: '', city: '', country: '',
     }, email: "", firstName: "", lastName: "", middleName: "", organization: "", phoneNumber: ""
   }
-  ticketsBought: { ticketType:TicketWebInterface, attendeeInfo: PersonalInformationInterface }[] = []
+  ticketsBought: { ticketType: TicketWebInterface, attendeeInfo: PersonalInformationInterface }[] = []
   @ViewChild('contactForm') input!: NgForm;
-  loading=false;
-  completed=true;
+  loading = false;
+  completed = false;
 
   ngOnInit(): void {
     this.data.event.tickets.forEach(ticket => {
@@ -97,7 +98,7 @@ export class EventRegistrationComponent implements OnInit {
     return RegistrationStepSelection;
   }
 
-  setStep() {
+  async setStep() {
     switch (this.currentStep) {
       case RegistrationStepSelection.tickets:
         this.currentStep = RegistrationStepSelection.registration
@@ -111,20 +112,25 @@ export class EventRegistrationComponent implements OnInit {
             this.input.controls[key].markAsDirty();
             this.input.controls[key].markAllAsTouched();
           });
-        if (this.getTotalTicketPrice() <= 0) {
-          this.purchaseTickets();
+        if (this.getTotalTicketPrice() > 0) {
+          this.currentStep = RegistrationStepSelection.tickets
+          await this.purchaseTickets();
         }
         console.log(this.ticketsBought)
         break;
       case RegistrationStepSelection.purchase:
         this.currentStep = RegistrationStepSelection.tickets
-        this.purchaseTickets();
+        await this.purchaseTickets();
         break;
     }
   }
 
-  purchaseTickets() {
-    OrderModel.purchase(this.ticketsBought, this.contactInfo, this.data.event.id);
+  async purchaseTickets() {
+    console.log('\n\n', this.ticketsBought, '\n\n', this.contactInfo)
+    this.loading = true;
+    await OrderModel.purchase(this.ticketsBought, this.contactInfo, this.data.event.id);
+    this.loading = false;
+    this.completed = true;
   }
 
   requireEachUser() {
@@ -134,12 +140,16 @@ export class EventRegistrationComponent implements OnInit {
         require = true;
       }
     })
-    if(!require){
+    if (!require) {
       this.ticketsBought.forEach(ticket => {
         ticket.attendeeInfo = this.contactInfo;
       })
     }
     return require;
+  }
+
+  getAddress(address: AddressInterface) {
+    return FormatAddress(address)
   }
 }
 

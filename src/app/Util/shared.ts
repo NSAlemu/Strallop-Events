@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import * as Parse from 'parse';
 import {RolesModel, RolesModelInterface} from "../../Models/Roles.model";
 import {RoleAccess} from "../Guard/event-read.guard";
+import {AddressInterface} from "../../Models/Address.model";
 
 export function AlertSnackBar(snackBar: MatSnackBar, success: boolean, message: string) {
   snackBar.open(message, undefined, {
@@ -44,6 +45,25 @@ export function GetDate(date: Date): string | null {
 export function GetFullDate(date: Date): string | null {
   const pipe = new DatePipe('en-US');
   return `${pipe.transform(date, 'EEEE, MMMM dd, YYYY')} at ${pipe.transform(date, 'hh:mm a')}`;
+}
+
+export function FormatAddress(address: AddressInterface) {
+  let formattedAddress = '';
+  formattedAddress += address.name.length > 0 ? address.name.length : ''
+  formattedAddress += formattedAddress.length > 0 && address.address1.length > 0 ? ', ' : ''
+
+  formattedAddress += address.address1.length > 0 ? address.address1.length : ''
+  formattedAddress += formattedAddress.length > 0 && address.address2.length > 0 ? ', ' : ''
+
+  formattedAddress += address.address2.length > 0 ? address.address2.length : ''
+  formattedAddress += formattedAddress.length > 0 && address.city.length > 0 ? ', ' : ''
+
+  formattedAddress += address.city.length > 0 ? address.city.length : ''
+  formattedAddress += formattedAddress.length > 0 && address.country.length > 0 ? ', ' : ''
+
+  formattedAddress += address.country.length > 0 ? address.country.length : ''
+
+  return formattedAddress;
 }
 
 export function ErrorCatcher(router: Router, reason: any) {
@@ -91,7 +111,6 @@ export async function CheckCurUserOrderReadAccess(eventId: string, router: Route
     }
   })
 }
-
-// export const serverLocation = 'http://localhost:1337'
-export const serverLocation = 'https://fichach-parse.herokuapp.com'
+export const serverLocation = 'http://localhost:1337'
+// export const serverLocation = 'https://fichach-parse.herokuapp.com'
 // export const serverLocation = 'https://parseapi.back4app.com'

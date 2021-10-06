@@ -1,0 +1,48 @@
+*{
+  font-family: Bitter;
+}
+h5{
+
+}
+.center {
+  margin: auto;
+  width: 75%;
+  padding: 10px;
+}
+.about-text{
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  line-height: 30px;
+  color: #c5c5c5;
+}
+.about-hero{
+  margin-bottom: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: 26px;
+}
+.about-sub-hero{
+  margin-bottom: 30px;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 30px;
+  font-size: 16px;
+  color: #c5c5c5;
+}
+.about-header{
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38px;
+}
+@media screen and (min-width: 990px) {
+  .about-sub-hero{
+    font-size: calc(16px + 4 * ((100vw - 1500px) / 940));
+  }
+  .about-hero{
+    font-size: calc(26px + 26 * ((100vw - 800px) / 640));
+  }
+}
