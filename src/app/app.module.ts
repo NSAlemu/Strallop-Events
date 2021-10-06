@@ -75,6 +75,7 @@ import { HelpFeedbackComponent } from './GeneralComponents/help-feedback/help-fe
 import { SecurityComponent } from './GeneralComponents/security/security.component';
 import { TermsComponent } from './GeneralComponents/terms/terms.component';
 import { PrivacyComponent } from './GeneralComponents/privacy/privacy.component';
+import { CookiesComponent } from './GeneralComponents/cookies/cookies.component';
 
 // Parse.initialize("selupdfUHcQqJAHHljBy6Z9RoaR4iUKkqGL76DTs", "rhchvsOtCd6ZNe53TuxkBGJ8JLWJXczbvqTXDOBK");
 //javascriptKey is required only if you have it on server.
@@ -104,7 +105,8 @@ const routes: Routes = [
   {path: 'security', component: SecurityComponent},
   {path: 'help-feedback', component: HelpFeedbackComponent},
   {path: 'terms', component: TermsComponent},
-  {path: 'privacy', component: PrivacyComponent}
+  {path: 'privacy', component: PrivacyComponent},
+  {path: 'cookies', component: CookiesComponent}
 ]
 export const routingConfiguration: ExtraOptions = {
   paramsInheritanceStrategy: 'always',
@@ -190,7 +192,8 @@ const modules = [
     HelpFeedbackComponent,
     SecurityComponent,
     TermsComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    CookiesComponent
   ],
   exports: [
     RouterModule
