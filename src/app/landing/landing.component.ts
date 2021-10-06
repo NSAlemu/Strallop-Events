@@ -15,6 +15,7 @@ export class LandingComponent implements OnInit {
   featuredEvents: EventWebInterface[] = []
   eventId = '';
   event!: EventInterface;
+  time:{hour:string, min:string, sec: string} = {hour:'', min:'', sec: ''}
   constructor( private titleService: Title, private httpClient: HttpClient, private route: ActivatedRoute,
                private router: Router) {
     this.eventId = this.route.snapshot.paramMap.get('eventId')!;

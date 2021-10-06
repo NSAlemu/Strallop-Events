@@ -1,73 +1,69 @@
 <app-toolbar class="fixed-top" style="z-index: 1000"></app-toolbar>
-<div *ngIf="event" class="pt-5 mt-3 content h-100 bg-transparent">
+<div *ngIf="event" class="pt-5 mt-3 container content h-100 bg-transparent">
   <div class="row w-100 m-0 ">
-    <img
-      [src]="event.coverImage && event.coverImage.length>0? event.coverImage: 'assets/views/event_image_placeholder.png'"
-      class="col-12 p-0 header-image"
-      style="object-fit: cover; border-radius: 10px; margin-top: 25px; z-index: 100;
-        border: rgba(255,183,0,0.2) 1px solid">
-  </div>
-  <div class="row  w-100 mt-lg-5 mt-md-4 mt-sm-3 mt-1">
-    <div class="col-12 d-block d-md-none my-4 px-lg-3">
-      <p class="mb-1">
+    <div class="col-7 m-0">
+      <img
+        [src]="event.coverImage && event.coverImage.length>0? event.coverImage: 'assets/views/event_image_placeholder.png'"
+        class=" py-0 px-1 header-image"
+        style="height:60vh;object-fit: cover; border-radius: 6px; margin-top: 25px; z-index: 100;">
+      <div class="d-flex justify-content-center " style="margin-top: -40px">
+        <div>
+          <div
+            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">
+            12
+          </div>
+          <div
+            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">{{time.hour}}</div>
+          <div
+            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">{{time.min}}</div>
+          <div
+            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">{{time.sec}}</div>
+        </div>
+      </div>
+    </div>
+<app-custom-countdown-timer></app-custom-countdown-timer>
+    <div class="col-5 p-0 d-flex my-4 px-3">
+      <div>
+        <h2 class="mb-3">{{event.name}}</h2>
+        <div class="my-3">
+          <p class="icon-container mt-4 ev_date_loc">
+            <mat-icon inline class="icon-md">room</mat-icon>
+            {{event.address.address1}}
+          </p>
+          <p class="icon-container ev_date_loc">
+            <mat-icon inline class="icon-md">calendar_today</mat-icon>
+            {{event.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row  w-100 mt-lg-5 mt-md-4 mt-sm-3 mt-1">
+      <div class="col-12 d-block d-md-none my-4 px-lg-3">
+        <p class="mb-1">
         <span *ngIf="event.tickets.length>0">
           Tickets Br. {{getMinPrice()}}
           <span *ngIf="event.tickets.length>1">- Br. {{getMaxPrice()}}</span></span>
-        <span *ngIf="event.tickets.length===0">Tickets arn'tt posted yet. Check back later</span>
-      </p>
-      <button mat-raised-button color="primary" class="w-100 big-action-button" (click)="openTicketDialog()">Get
-        Tickets
-      </button>
-    </div>
-    <div class="col-12 col-lg-8 col-md-8 px-lg-3">
-      <h4 class="mb-3">{{event.name}}</h4>
-      <div class="my-3">
-        <p class="icon-container mt-4 ev_date_loc">
-          <mat-icon inline class="icon-md">room</mat-icon>
-          {{event.address.address1}}
+          <span *ngIf="event.tickets.length===0">Tickets arn'tt posted yet. Check back later</span>
         </p>
-        <p class="icon-container ev_date_loc">
-          <mat-icon inline class="icon-md">calendar_today</mat-icon>
-          {{event.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
+        <button mat-raised-button color="primary" class="w-100 big-action-button" (click)="openTicketDialog()">Get
+          Tickets
+        </button>
       </div>
-      <div [froalaView]="event.description"></div>
-      <div class="mt-4 ev_desc">
-        It's been too long but we're back! LUNA FLIX debuts at this new venue screening our most popular films and who
-        doesn't love QUEEN! Enjoy the iconic rock movie classic with friends and family.
-        <br>
-        <br>
+      <div class="col-12 col-lg-8 col-md-8 px-lg-3">
 
-        Film commences after sunset - approx 8.30pm. Please bring own picnic (no food on sale) and seating. Book early,
-        this is sure to sell-out. ONLINE TICKETS SALES CLOSE August 29 at 9pm.
-        <br>
-        <br>
-
-        PLEASE NOTE:
-        <br>
-        <br>
-
-        Tickets are NON-refundable – Except in the rare case of event cancellation. Should that occur, email
-        notification will be sent on the morning of the event though booking fees are not refundable.
-        <br>
-        <br>
-
-        COVID NOTICE: If any ticket holder of your group, becomes Covid positive for the show, PLEASE DO NOT LET THEM
-        ATTEND & contact us immediately at lunaflix@btinternet.com - NO LATER than 24hrs prior to event please. In this
-        circumstance only we will allow a refund of their ticket.
+        <div [froalaView]="event.description"></div>
       </div>
-    </div>
-    <div class="col-12 col-lg-4 col-md-4 d-none d-md-block px-lg-3">
-      <p class="mb-1">
+      <div class="col-12 col-lg-4 col-md-4 d-none d-md-block px-lg-3">
+        <p class="mb-1">
          <span *ngIf="event.tickets.length>0">
                   Tickets Br. {{getMinPrice()}}
            <span *ngIf="event.tickets.length>1">- Br. {{getMaxPrice()}}</span></span>
-        <span *ngIf="event.tickets.length===0"
-              style="font-size: 0.8em">Tickets aren't posted yet. Check back later</span>
-      </p>
-      <button mat-raised-button color="primary" [disabled]="event.tickets.length===0"
-              [class.disable-button]="event.tickets.length===0" class="w-100 big-action-button"
-              (click)="openTicketDialog()">Get Tickets
-      </button>
+          <span *ngIf="event.tickets.length===0"
+                style="font-size: 0.8em">Tickets aren't posted yet. Check back later</span>
+        </p>
+        <button mat-raised-button color="primary" [disabled]="event.tickets.length===0"
+                [class.disable-button]="event.tickets.length===0" class="w-100 big-action-button"
+                (click)="openTicketDialog()">Get Tickets
+        </button>
+      </div>
     </div>
   </div>
-</div>

@@ -76,6 +76,7 @@ import { SecurityComponent } from './GeneralComponents/security/security.compone
 import { TermsComponent } from './GeneralComponents/terms/terms.component';
 import { PrivacyComponent } from './GeneralComponents/privacy/privacy.component';
 import { CookiesComponent } from './GeneralComponents/cookies/cookies.component';
+import { CustomCountdownTimerComponent } from './ReusableComponents/custom-countdown-timer/custom-countdown-timer.component';
 
 // Parse.initialize("selupdfUHcQqJAHHljBy6Z9RoaR4iUKkqGL76DTs", "rhchvsOtCd6ZNe53TuxkBGJ8JLWJXczbvqTXDOBK");
 //javascriptKey is required only if you have it on server.
@@ -101,6 +102,12 @@ const routes: Routes = [
       {path: 'details', component: RegisterDetailsComponent}
     ]
   },
+  {path: 'settings', component: SettingsBaseComponentComponent, children:[
+      {path: 'home', component: SettingHomeComponentComponent},
+      {path: 'account', component: SettingAccountComponent},
+      {path: 'team-management', component: SettingTeamManagementComponentComponent},
+    ]},
+
   {path: 'about', component: AboutComponent},
   {path: 'security', component: SecurityComponent},
   {path: 'help-feedback', component: HelpFeedbackComponent},
@@ -193,7 +200,8 @@ const modules = [
     SecurityComponent,
     TermsComponent,
     PrivacyComponent,
-    CookiesComponent
+    CookiesComponent,
+    CustomCountdownTimerComponent,
   ],
   exports: [
     RouterModule

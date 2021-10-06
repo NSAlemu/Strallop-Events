@@ -22,7 +22,8 @@ import {min} from "rxjs/operators";
 export class EventDetailsComponent implements OnInit {
   eventId = '';
   event!: EventWebInterface;
-
+  time:{hour:string, min:string, sec: string} = {hour:'', min:'', sec: ''}
+  interval:any;
   constructor( private titleService: Title, private route: ActivatedRoute,
               private router: Router, private httpClient: HttpClient,public dialog: MatDialog) {
     this.eventId = this.route.snapshot.paramMap.get('eventId')!;
@@ -34,8 +35,16 @@ export class EventDetailsComponent implements OnInit {
     if(!this.event)
     this.event = getEvents()[Math.floor(Math.random()*getEvents().length)]
     this.titleService.setTitle(this.event.name);
+    this.interval = setInterval(value=>{
+      const date = new Date();
+      this.time.hour = date.getHours()>12?(date.getHours()-12) + '': date.getHours()+'';
+      this.time.min = date.getMinutes()<10? '0'+date.getMinutes(): date.getMinutes()+'';
+      this.time.sec = date.getSeconds()+'';
+    },1000)
   }
+  ngOnDestroy(){
 
+  }
   async getEvent() {
     this.event = await EventModel.getWebEvent(this.eventId)
   }

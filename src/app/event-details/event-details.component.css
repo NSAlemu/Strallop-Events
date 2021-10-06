@@ -8,8 +8,7 @@
   font-size: 0.9em;
 }
 .header-image{
-  max-height: 350px;
-  min-height: 350px;
+
 }
 .disable-button{
   background-color: #c4c4c4!important;
@@ -17,23 +16,22 @@
 }
 @media (min-width: 0px) {
   .header-image{
-    max-height: 250px;
-    min-height: 250px;  }
+
+ }
 }
 @media (min-width: 576px) {
   .header-image{
-    max-height: 350px;
-    min-height: 350px;  }
+
+ }
 }
 @media (min-width: 768px) {
   .header-image{
-    max-height: 400px;
-    min-height: 400px;  }
+
+ }
 }
 @media (min-width: 992px) {
   .header-image{
-    max-height: 450px;
-    min-height: 450px;
+
   }
 }
 

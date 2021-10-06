@@ -10,91 +10,18 @@
       </div>
 
       <div class=" mt-5" style="width: 1272px; max-width: 100vw;margin: 5px auto 16px;padding: 0 16px;">
-        <mat-tab-group animationDuration="0ms" mat-align-tabs="center" style="max-width: 100%">
-          <mat-tab class='sticky' label="Top Events">
-            <ng-template matTabContent>
-              <app-medium-category-skeleton *ngIf="featuredEvents.length===0"></app-medium-category-skeleton>
-              <div class="d-flex row" *ngIf="featuredEvents.length>0">
-                <a routerLink="events/{{carousel.id!}}" class="col-lg-3 col-md-4 col-sm-6 col-12"
-                   *ngFor="let carousel of featuredEvents">
-                  <app-medium-category-card
-                    [carouselItem]="carousel"></app-medium-category-card>
-                </a>
+        <h5 class="fw-bold mt-4">Upcoming Events</h5>
+        <div>
+          <app-medium-category-skeleton *ngIf="featuredEvents.length===0"></app-medium-category-skeleton>
+          <div class="d-flex row" *ngIf="featuredEvents.length>0">
+            <a routerLink="events/{{carousel.id!}}" class="col-lg-3 col-md-4 col-sm-6 col-12"
+               *ngFor="let carousel of featuredEvents">
+              <app-medium-category-card
+                [carouselItem]="carousel"></app-medium-category-card>
+            </a>
 
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab class='sticky' label="For You">
-            <ng-template matTabContent>
-              <div class="d-flex row">
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab class='sticky' label="Today">
-            <ng-template matTabContent>
-              <div class="d-flex row">
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab class='sticky' label="This Weekend">
-            <ng-template matTabContent>
-              <div class="d-flex row">
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab class='sticky' label="Free">
-            <ng-template matTabContent>
-              <div class="d-flex row">
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab class='sticky' label="Charities & Causes">
-            <ng-template matTabContent>
-              <div class="d-flex row">
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-                <app-medium-category-card class="col-3" *ngFor="let carousel of featuredEvents"
-                                          [carouselItem]="carousel"></app-medium-category-card>
-              </div>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
+          </div>
+        </div>
         <app-notification-banner></app-notification-banner>
       </div>
     </div>
