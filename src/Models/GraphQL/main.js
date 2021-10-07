@@ -1,5 +1,3 @@
-
-
 Parse.Cloud.define("getanEvent", async (request) => {
   console.log('request: ' + request)
   const query = new Parse.Query("Event");
@@ -607,5 +605,4 @@ Parse.Cloud.define('sendEmail', async (request) => {
     console.error('Request failed with response code ' + httpResponse.status);
   });
 });
-
 

@@ -5,23 +5,8 @@
       <img
         [src]="event.coverImage && event.coverImage.length>0? event.coverImage: 'assets/views/event_image_placeholder.png'"
         class=" py-0 px-1 header-image"
-        style="height:60vh;object-fit: cover; border-radius: 6px; margin-top: 25px; z-index: 100;">
-      <div class="d-flex justify-content-center " style="margin-top: -40px">
-        <div>
-          <div
-            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">
-            12
-          </div>
-          <div
-            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">{{time.hour}}</div>
-          <div
-            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">{{time.min}}</div>
-          <div
-            style="margin-right:5px;color: black;float:left;background: white;width: 60px;height: 80px; border: 1px grey solid">{{time.sec}}</div>
-        </div>
-      </div>
+        style="width: 100%;object-fit: cover; border-radius: 6px; margin-top: 25px; z-index: 100;">
     </div>
-<app-custom-countdown-timer></app-custom-countdown-timer>
     <div class="col-5 p-0 d-flex my-4 px-3">
       <div>
         <h2 class="mb-3">{{event.name}}</h2>

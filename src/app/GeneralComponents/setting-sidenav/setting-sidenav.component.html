@@ -1,27 +1,27 @@
-<div class="base">
+<div class="base" >
   <div>
-    <app-toolbar-component [drawer]="drawer"></app-toolbar-component>
+    <app-toolbar style="position:fixed;z-index: 1000;width: 100vw" [drawer]="drawer"></app-toolbar>
     <mat-sidenav-container class="sidenav-container" >
       <mat-sidenav #drawer class="sidenav" fixedInViewport
                    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                    [mode]="(isHandset$ | async) ? 'over' : 'side'"
                    [opened]="(isHandset$ | async) === false"
-                   style="margin-top: 67px; background-color: #ffffff">
-        <mat-toolbar class="mat-elevation-z1 mb-2">Settings</mat-toolbar>
+                   style="margin-top: 67px; background-color: #323638; color: white">
+        <mat-toolbar class="mat-elevation-z1 my-3 py-4" style="color: white; border-bottom-color: white">Account Settings</mat-toolbar>
         <mat-nav-list>
-          <a mat-list-item routerLink="/settings/staff-management"
+          <a mat-list-item routerLink="/settings/account-info"
              routerLinkActive="active-sidenav-link">
-            <p routerLinkActive="active-sidenav-p">Staff Management</p></a>
-          <a mat-list-item routerLink="/settings/account"
+            <p routerLinkActive="active-sidenav-p">Account Info</p></a>
+          <a mat-list-item routerLink="/settings/account-password"
              routerLinkActive="active-sidenav-link">
-            <p routerLinkActive="active-sidenav-p">Account</p></a>
-          <a mat-list-item routerLink="/settings/theme"
+            <p routerLinkActive="active-sidenav-p">Password</p></a>
+          <a mat-list-item routerLink="/settings/close-account"
              routerLinkActive="active-sidenav-link">
-            <p routerLinkActive="active-sidenav-p">Theme</p></a>
+            <p routerLinkActive="active-sidenav-p">Close Account</p></a>
         </mat-nav-list>
       </mat-sidenav>
-      <mat-sidenav-content style="max-height: calc(100vh - 67px)">
-        <ng-content></ng-content>
+      <mat-sidenav-content style="padding-top: 68px">
+        <ng-content style="background-color:green;overflow:auto;height: 20px"></ng-content>
         <!-- Add Content Here -->
       </mat-sidenav-content>
     </mat-sidenav-container>

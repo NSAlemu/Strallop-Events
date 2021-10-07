@@ -1,0 +1,15 @@
+<div style="background-color: white; padding: 25px">
+  <h3 mat-dialog-title class="align-items-start d-flex">
+    <span *ngIf="data.header">{{data.header}}</span>
+    <span *ngIf="!data.header">Delete User?</span>
+  </h3>
+  <div class="mb-3">
+    {{data.message}}
+    <br>
+  </div>
+  <div>
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="warn">Dekklete
+    </button>
+  </div>
+</div>

@@ -1,14 +1,18 @@
 p{
-  color: #6f7287;
+  color: white!important;
   margin-bottom: 0;
   align-items: center;
   display: flex;
   padding-left: 12px !important;
-  font-size: 0.85em !important;
+  font-size: 14px !important;
 }
-.base{
-  background-color: #1b1d1e;
+a{
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.mat-drawer-container{
   color: white;
+  background-color: #1b1d1e;
 }
 .mat-expansion-panel-header {
   background-color: #f8f7fa;
@@ -33,7 +37,7 @@ p{
 }
 
 .sidenav {
-  width: 200px;
+  width: 300px;
 }
 
 .sidenav .mat-toolbar {
@@ -44,4 +48,7 @@ p{
   position: sticky;
   top: 0;
   z-index: 1;
+}
+.active-sidenav-link{
+  background-color: #424749;
 }

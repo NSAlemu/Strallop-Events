@@ -111,6 +111,6 @@ export async function CheckCurUserOrderReadAccess(eventId: string, router: Route
     }
   })
 }
-export const serverLocation = 'http://localhost:1337'
-// export const serverLocation = 'https://fichach-parse.herokuapp.com'
+// export const serverLocation = 'http://localhost:1337'
+export const serverLocation = 'https://strallop.herokuapp.com'
 // export const serverLocation = 'https://parseapi.back4app.com'

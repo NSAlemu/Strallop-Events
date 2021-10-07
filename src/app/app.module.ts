@@ -77,6 +77,14 @@ import { TermsComponent } from './GeneralComponents/terms/terms.component';
 import { PrivacyComponent } from './GeneralComponents/privacy/privacy.component';
 import { CookiesComponent } from './GeneralComponents/cookies/cookies.component';
 import { CustomCountdownTimerComponent } from './ReusableComponents/custom-countdown-timer/custom-countdown-timer.component';
+import { SettingAccountPasswordComponent } from './GeneralComponents/setting-account-password/setting-account-password.component';
+import { SettingAccountCloseComponent } from './GeneralComponents/setting-account-close/setting-account-close.component';
+import {EventImageUploadComponent} from "./ReusableComponents/event-image-upload/event-image-upload.component";
+import {EventImageUploadDialogComponent} from "./ReusableComponents/event-image-upload-dialog/event-image-upload-dialog.component";
+import {ImageCropperModule} from "ngx-image-cropper";
+import { EmailSentDialogComponent } from './ReusableComponents/email-sent-dialog/email-sent-dialog.component';
+import { SignupComponent } from './GeneralComponents/signup/signup.component';
+import { ForgotPasswordComponent } from './GeneralComponents/forgot-password/forgot-password.component';
 
 // Parse.initialize("selupdfUHcQqJAHHljBy6Z9RoaR4iUKkqGL76DTs", "rhchvsOtCd6ZNe53TuxkBGJ8JLWJXczbvqTXDOBK");
 //javascriptKey is required only if you have it on server.
@@ -84,13 +92,13 @@ import { CustomCountdownTimerComponent } from './ReusableComponents/custom-count
 // (Parse as any).serverURL = "https://parseapi.back4app.com/";
 
 Parse.initialize('APPLICATION_ID');
-(Parse as any).serverURL = 'http://localhost:1337/parse';
-// @ts-ignore
-Parse.liveQueryServerURL = 'ws://localhost:1337/';
-
-// (Parse as any).serverURL = 'https://fichach-parse.herokuapp.com/parse';
+// (Parse as any).serverURL = 'http://localhost:1337/parse';
 // // @ts-ignore
-// Parse.liveQueryServerURL = 'wss://fichach-parse.herokuapp.com/';
+// Parse.liveQueryServerURL = 'ws://localhost:1337/';
+
+(Parse as any).serverURL = 'https://strallop.herokuapp.com/parse';
+// @ts-ignore
+Parse.liveQueryServerURL = 'wss://strallop.herokuapp.com/';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
@@ -103,17 +111,21 @@ const routes: Routes = [
     ]
   },
   {path: 'settings', component: SettingsBaseComponentComponent, children:[
-      {path: 'home', component: SettingHomeComponentComponent},
-      {path: 'account', component: SettingAccountComponent},
-      {path: 'team-management', component: SettingTeamManagementComponentComponent},
-    ]},
-
+      {path: 'account-password', component: SettingAccountPasswordComponent},
+      {path: 'account-info', component: SettingAccountComponent},
+      {path: 'close-account', component: SettingAccountCloseComponent},
+    ]
+  },
   {path: 'about', component: AboutComponent},
   {path: 'security', component: SecurityComponent},
   {path: 'help-feedback', component: HelpFeedbackComponent},
   {path: 'terms', component: TermsComponent},
   {path: 'privacy', component: PrivacyComponent},
-  {path: 'cookies', component: CookiesComponent}
+  {path: 'cookies', component: CookiesComponent},
+  {path: 'login', component: LoginComponentComponent},
+  {path: 'signup', component: SignupComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+
 ]
 export const routingConfiguration: ExtraOptions = {
   paramsInheritanceStrategy: 'always',
@@ -165,7 +177,8 @@ const modules = [
   ReactiveFormsModule,
   FormsModule,
   MaterialFileInputModule,
-  HttpClientModule
+  HttpClientModule,
+  ImageCropperModule
 ];
 
 @NgModule({
@@ -202,6 +215,14 @@ const modules = [
     PrivacyComponent,
     CookiesComponent,
     CustomCountdownTimerComponent,
+    SettingAccountPasswordComponent,
+    SettingAccountCloseComponent,
+    EventImageUploadComponent,
+    EventImageUploadDialogComponent,
+    ConfirmDialogComponent,
+    EmailSentDialogComponent,
+    SignupComponent,
+    ForgotPasswordComponent
   ],
   exports: [
     RouterModule

@@ -2,6 +2,7 @@ import * as Parse from 'parse';
 import {RolesModel, RolesModelInterface} from "./Roles.model";
 import {HttpClient} from "@angular/common/http";
 import {UserGraphQLModel} from "./GraphQL/UserGraphQL.model";
+import {log} from "util";
 
 export class UserModel {
   id: string;
@@ -100,37 +101,27 @@ export class UserModel {
     return Parse.User.logOut();
   }
 
-  static async saveUser(newUser: UserInterface, profileImg?: File, profileUpdated?: boolean): Promise<UserModel | Parse.Error> {
-    const user = Parse.User.createWithoutData(newUser.id!);
+  static async saveUser(newUser: UserInterface, profileImg?: File, profileImageUrl?: string): Promise<UserModel | Parse.Error> {
+    const user = await new Parse.Query(Parse.User).get(newUser.id!);
     user.set('name', newUser.name);
     user.set('username', newUser.username);
     if (newUser.id === Parse.User.current()!.id)
       user.set('email', newUser.email);
     user.set('phone', newUser.phoneNumber);
-    if (profileUpdated) {
-      if (profileImg) {
-        const coverFile = await new Parse.File('profileImg.png', profileImg).save();
-        user.set('profileImg', coverFile);
-      } else {
-        Parse.Cloud.run('deleteUserProfile');
-      }
+    if (profileImg) {
+      user.set('profileImg', await new Parse.File('profileImg.png', profileImg).save());
+    } else if ((!profileImageUrl || profileImageUrl.length === 0) &&
+      (Parse.User.current() && Parse.User.current()!.get('profileImg'))) {
+      await Parse.Cloud.run('deleteUserProfile');
     }
-    return await this.moveUserAccess(newUser.id!, newUser.access.id!).then(
-      async value => {
-        if (value instanceof Parse.Error) {
-          return value;
-        }
-        return new UserModel(await user.save());
-      }
-    ).catch(reason => {
-      return new Parse.Error(reason.code, reason.message);
-    });
+
+    return new UserModel(await user.save());
   }
 
   static async getAllParseUser(httpClient: HttpClient): Promise<UserInterface[]> {
-    const userobjs =  await new Parse.Query(Parse.User).equalTo('organization',Parse.User.current()!.get('organization')).find()
+    const userobjs = await new Parse.Query(Parse.User).equalTo('organization', Parse.User.current()!.get('organization')).find()
     const users = [];
-    for(const userobj of userobjs){
+    for (const userobj of userobjs) {
       users.push(this.toUserInterface(userobj))
     }
     return users
@@ -215,6 +206,18 @@ export class UserModel {
       return user;
     });
     return user;
+  }
+
+  static async resetPassword(currentPassword: string, newPassword: string) {
+    return await Parse.User.requestPasswordReset('nebiyou16@gmail.com').then(value => {
+      console.log(value);
+    }, reason => {
+      console.log(reason);
+      return reason;
+    }).catch(reason => console.log(reason))
+  }
+
+  static closeAccount(confirmPassword: string) {
   }
 }
 

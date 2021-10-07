@@ -1,0 +1,20 @@
+<div *ngIf="!data.loading" style="background-color: white; padding: 25px;width: 500px;max-width: 80vw; height: 45vh"
+     class="d-flex align-items-center justify-content-center">
+ <div class="w-100">
+   <h3 mat-dialog-title class="d-flex justify-content-center">
+     <img [src]="data.error.length>0?'/assets/icons/mail_send_failed.png':'/assets/icons/mail_sent.png'" height="128"/>
+   </h3>
+   <mat-dialog-content class="m-0 w-100 " style="min-height: 10vh">
+     <p class="text-center mb-0 mt-2" *ngIf="data.error.length===0"> Password reset email sent to <br><span class="fw-bolder" style="font-size: 1.1em">{{data.message}}</span></p>
+     <p class="text-center fw-bold" style="font-size: 1.1em" *ngIf="data.error.length>0">{{data.error}}</p>
+     <br>
+   </mat-dialog-content>
+   <mat-dialog-actions class="w-100">
+     <button mat-raised-button color="primary" class="big-action-button" [mat-dialog-close] >Okay
+     </button>
+   </mat-dialog-actions>
+ </div>
+</div>
+<div *ngIf="data.loading" style="width: 500px;max-width: 80vw; height: 45vh" class="d-flex align-items-center justify-content-center">
+  <mat-spinner></mat-spinner>
+</div>

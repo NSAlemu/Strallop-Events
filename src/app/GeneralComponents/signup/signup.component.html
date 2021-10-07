@@ -1,0 +1,82 @@
+<div class="overflow-hidden" style="background-color: #1b1d1e;color: white; max-width: 100%; width: 100vw; height: 100vh" class="row p-0 m-0">
+  <div class="login-container col-md-6 col-sm-12 m-0 p-0  align-content-center d-flex">
+    <div class="w-100 h-100 justify-content-md-center align-items-center d-flex">
+      <div class="w-100 ">
+        <div class="align-items-center justify-content-center  d-flex  ">
+          <img src="/assets/logo.png" style="margin-right:20px;max-width:30px; width: 100%; height: auto">
+          <h3 class="text-center fw-bold">STRALLOP EVENTS</h3>
+        </div>
+        <div class=" justify-content-center d-flex " style="margin-bottom: 35px; margin-top: 20px">
+
+        </div>
+        <div class="w-100">
+          <form #loginGroup='ngForm' class="row" (ngSubmit)="loginGroup.valid  && signup()">
+            <div class=" justify-content-center d-flex  ">
+              <div class="col-lg-8 col-md-9 col-sm-12 col-12">
+                <mat-form-field class="w-100 form-field-no-padding" appearance="outline">
+                  <mat-icon matPrefix style="margin-right: 12px; color: #b0b0b0">
+                    account_circle
+                  </mat-icon>
+                  <input matInput required name="username" [(ngModel)]="username"   placeholder="Username" style="color: white">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class=" justify-content-center d-flex  ">
+              <div class="col-lg-8 col-md-9 col-sm-12 col-12">
+                <mat-form-field class="w-100 form-field-no-padding" appearance="outline">
+                  <mat-icon matPrefix style="margin-right: 12px; color: #b0b0b0">
+                    email
+                  </mat-icon>
+                  <input matInput required name="email" [(ngModel)]="email"   placeholder="Email" style="color: white">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="justify-content-center d-flex  ">
+              <div class="col-lg-8 col-md-9 col-sm-12 col-12">
+                <mat-form-field class="w-100 form-field-no-padding" appearance="outline">
+                  <mat-icon matPrefix style="margin-right: 12px; color: #b0b0b0">
+                    lock
+                  </mat-icon>
+                  <input matInput type="password" required name="password" [(ngModel)]="password" placeholder="Password">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="justify-content-center d-flex  ">
+              <div class="col-lg-8 col-md-9 col-sm-12 col-12">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-icon matPrefix style="margin-right: 12px; color: #b0b0b0">
+                    lock
+                  </mat-icon>
+                  <input matInput type="password" required name="password" [(ngModel)]="confirmPassword" placeholder="Confirm Password">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class=" justify-content-center d-flex ">
+              <div *ngIf="!loading" class="col-lg-8 col-md-9 col-sm-12 col-12 mw-100">
+                <button   mat-raised-button class="w-100 big-action-button" style=" height: 40px" color="primary" type="submit">Sign up
+                </button>
+                <a  class="w-100 big-action-button" routerLink="/login">
+                  <button   mat-stroked-button class="w-100 big-action-button"
+                            style="margin-top:10px;background-color: #3b3b41;color: white; height: 40px"
+                            color="primary" type="button">Login
+                  </button>
+                </a>
+              </div>
+              <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-0 p-0 m-0">
+    <!--    <div style="background-color: #0202ae" class="w-100 h-100 align-content-center d-flex">-->
+    <!--      <div class="align-self-center">-->
+    <!--        <img src="assets/logo.png" class="w-100 h-auto p-5">-->
+    <!--        <h1 class="text-center text-white mw-100 p-5">For all your event needs</h1>-->
+    <!--      </div>-->
+
+    <!--    </div>-->
+    <img src="https://www.africastrictlybusiness.com/wp-content/uploads/2014/12/AfricaBusinessConferernc.jpg" class="w-100 h-100 mw-100 m-0 d-none d-md-block" style="max-height: 100vh; object-position: center; object-fit: cover" >
+  </div>
+</div>

@@ -16,40 +16,18 @@ export class SettingAccountComponent implements OnInit {
   thisUser: UserInterface = UserModel.toUserInterface(UserModel.getCurrentUser());
   coverImageUrl = '';
   coverImageFile: any;
-  profileImgFormGroup!: FormGroup;
-  profileUpdated = false;
+
   constructor(private titleService: Title, private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder) {
     this.titleService.setTitle('Account Settings');
   }
   async ngOnInit() {
-
-    this.profileImgFormGroup = this.fb.group({
-      name: '',
-      coverImage: [],
-      description: '',
-    });
-    const fileReader = new FileReader();
-    fileReader.onload = e => {
-      // The file's text will be printed here
-      this.profileUpdated = true;
-      this.coverImageUrl = fileReader.result ? fileReader.result as string : '';
-    };
-    this.profileImgFormGroup.controls.coverImage.valueChanges.subscribe((coverImage: any) => {
-      if (!Array.isArray(coverImage) && this.profileImgFormGroup.controls.coverImage.value) {
-        this.coverImageFile = this.profileImgFormGroup.controls.coverImage.value.files[0];
-        fileReader.readAsDataURL(this.profileImgFormGroup.controls.coverImage.value.files[0]);
-      } else {
-        this.coverImageFile = undefined;
-        this.coverImageUrl = '';
-      }
-    });
     if ((await UserModel.getCurrentUser().fetch()).get('profileImg')) {
       this.coverImageUrl = UserModel.getCurrentUser().get('profileImg')._url;
     }
   }
 
   updateProfile(){
-    UserModel.saveUser(this.thisUser, this.coverImageFile, this.profileUpdated).then(value => {
+    UserModel.saveUser(this.thisUser, this.coverImageFile,this.coverImageUrl ).then(value => {
       if(value instanceof UserModel) {
         AlertSnackBar(this.snackBar, true, "Profile Updated!")
         this.thisUser = UserModel.toUserInterface(UserModel.getCurrentUser());

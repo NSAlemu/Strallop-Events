@@ -1,119 +1,91 @@
-<div style="background-color: white; height: 120px" class="px-lg-5 px-md-3 ">
-  <div class="content-header mx-lg-3">
+<div class="px-lg-5 px-md-3">
+  <div class="content-header mx-lg-3 my-4">
     <div class="d-flex mb-2 ">
-      <a class="breadcrumb-item" routerLink="/settings">Settings</a>
-      <a class="breadcrumb-pointer"> > </a>
-      <a class="breadcrumb-pointer">Account</a></div>
-    <h2>Account</h2>
+      <h2>Account Info</h2>
+    </div>
   </div>
-</div>
-<mat-progress-bar *ngIf="loading" mode="indeterminate" color="primary"
-                  style="position: sticky; top: 0; z-index: 100"></mat-progress-bar>
-<div class="wide-content" role="main">
-  <mat-card style="padding: 40px">
-    <form [formGroup]="profileImgFormGroup" appPasswordMatchValidation>
-      <h4>Profile Image</h4>
-      <mat-form-field class=" col-lg-6 col-md-9 col-12 p-0 m-0" appearance="outline">
-        <ngx-mat-file-input
-          id="my-id"
-          #coverImageSelector
-          [multiple]="false"
-          [accept]="'.jpg,.png'"
-          [disabled]="false"
-          style="height: 0"
-          formControlName="coverImage"></ngx-mat-file-input>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate" color="primary"
+                    style="position: sticky; top: 0; z-index: 100"></mat-progress-bar>
+  <div class="wide-content" role="main">
+    <mat-card style="background-color :#1b1d1e;">
+      <form #loginGroup='ngForm' (ngSubmit)="loginGroup.valid  && updateProfile()" appPasswordMatchValidation>
+        <h4>Profile Image</h4>
+        <div class="col-auto p-2" style="cursor:pointer;">
+          <app-event-image-upload [(file)]="coverImageFile" [(background)]="coverImageUrl"
+                                  [size]=200></app-event-image-upload>
+        </div>
+      </form>
+      <form #profileFormGroup='ngForm' (submit)="profileFormGroup.valid && updateProfile()">
+      <div class="col-lg-7 col-md-12">
+        <h4 style="margin-top: 60px; margin-bottom: 15px">Profile Information</h4>
+        <div class="mt-2 row">
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">
+                badgename
+              </mat-icon>
+              <input matInput #name="ngModel" required name="name" [(ngModel)]="thisUser.name" placeholder="Name">
+              <mat-hint *ngIf="(name.invalid && (name.dirty || name.touched)) && name.errors?.required">
+                Name is required.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">
+                account_circle
+              </mat-icon>
+              <input matInput #username="ngModel" minlength="6" required name="username" placeholder="Username"
+                     [(ngModel)]="thisUser.username">
+              <mat-hint
+                *ngIf="(username.invalid && (username.dirty || username.touched)) && username.errors?.minlength">
+                Username must be at least 6 characters long.
+              </mat-hint>
+              <mat-hint
+                *ngIf="(username.invalid && (username.dirty || username.touched)) && username.errors?.required">
+                Username is required.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">email
+              </mat-icon>
+              <input matInput #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email"
+                     name="email" placeholder="Email" [(ngModel)]="thisUser.email">
+              <mat-hint *ngIf="(email.invalid && (email.dirty || email.touched)) && email.errors?.pattern">
+                Email is not valid.
+              </mat-hint>
+              <mat-hint *ngIf="(email.invalid && (email.dirty || email.touched)) && email.errors?.required">
+                Email is required.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">phone
+              </mat-icon>
+              <input type="number" pattern="^[1-9]\d*$" matInput #phoneNumber='ngModel' name="phoneNumber" placeholder="Phone Number"
+                     [(ngModel)]="thisUser.phoneNumber">
+              <mat-hint
+                *ngIf="!((phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)) && phoneNumber.errors?.pattern)">
+                Optional
+              </mat-hint>
+              <mat-hint
+                *ngIf="(phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)) && phoneNumber.errors?.pattern">
+                Phone number can only contain numbers.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <div class="mt-5">
+            <button mat-raised-button color="primary" class="big-action-button">Update Profile</button>
+          </div>
+        </div>
+      </div>
+      </form>
 
-        <button mat-stroked-button type="button" class="w-100 mat-elevation-z1 justify-content-center"
-                style="background-color: #f6f6f6;  border-radius: 5px">
-          <div *ngIf="coverImageUrl.length!==0" class="justify-content-end d-flex">
-            <button mat-icon-button matSuffix (click)="coverImageSelector.clear($event); coverImageUrl = '';
-             coverImageFile = undefined; profileUpdated=true" type="button">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="coverImageUrl.length!==0" style="width: 100%">
-            <img src={{coverImageUrl}} style="max-width:100%; width: auto; height: 200px; object-fit: cover">
-            <h6 style="padding-top:15px; text-align: center; margin-block: 5px !important">
-              Click to change profile image</h6>
-          </div>
-          <div *ngIf="coverImageUrl.length===0" style="max-width: 100%; margin-top: 50px; margin-bottom: 50px;">
-            <mat-icon color="primary" inline style="font-size: 4em">person_outline</mat-icon>
-            <h5 class="text-truncate" style="max-width:100%;text-align: center; ">Add a profile image</h5>
-            <h5 class="text-truncate" style="font-size:0.7em;max-width:100%;text-align: center;">JPEG or PNG, less than
-              10MB</h5>
-          </div>
-        </button>
-      </mat-form-field>
-    </form>
-    <form #profileFormGroup='ngForm' (submit)="profileFormGroup.valid && updateProfile()">
-      <h4>Profile Information</h4>
-      <div class="mt-2 row">
-       <div class="col-lg-9 col-md-12">
-         <mat-label class="top-label">Name</mat-label>
-         <mat-form-field appearance="outline">
-           <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">
-             badgename
-           </mat-icon>
-           <input matInput #name="ngModel" required name="name" [(ngModel)]="thisUser.name" placeholder="">
-           <mat-hint *ngIf="(name.invalid && (name.dirty || name.touched)) && name.errors?.required">
-             Name is required.
-           </mat-hint>
-         </mat-form-field>
-       </div>
-       <div class="col-lg-9 col-md-12">
-         <mat-label class="top-label">Username</mat-label>
-         <mat-form-field appearance="outline">
-           <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">
-             account_circle
-           </mat-icon>
-           <input matInput #username="ngModel" minlength="6" required name="username" placeholder="Username"
-                  [(ngModel)]="thisUser.username">
-           <mat-hint
-             *ngIf="(username.invalid && (username.dirty || username.touched)) && username.errors?.minlength">
-             Username must be at least 6 characters long.
-           </mat-hint>
-           <mat-hint
-             *ngIf="(username.invalid && (username.dirty || username.touched)) && username.errors?.required">
-             Username is required.
-           </mat-hint>
-         </mat-form-field>
-       </div>
-       <div>
-         <mat-label class="top-label">Email</mat-label>
-         <mat-form-field class="col-lg-9 col-md-12" appearance="outline">
-           <mat-icon matPrefix class="align-items-end d-flex" style="font-size: large; margin-right: 5px">email
-           </mat-icon>
-           <input matInput #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email"
-                  name="email" [(ngModel)]="thisUser.email">
-           <mat-hint *ngIf="(email.invalid && (email.dirty || email.touched)) && email.errors?.pattern">
-             Email is not valid.
-           </mat-hint>
-           <mat-hint *ngIf="(email.invalid && (email.dirty || email.touched)) && email.errors?.required">
-             Email is required.
-           </mat-hint>
-         </mat-form-field>
-       </div>
-      <div class="col-lg-9 col-md-12">
-        <mat-label class="top-label">Phone Number</mat-label>
-        <mat-form-field appearance="standard">
-          <span matPrefix style="font-size: 0.9em">+251&nbsp;</span>
-          <input type="tel" pattern="^[1-9]\d*$" matInput #phoneNumber='ngModel' name="phoneNumber"
-                 [(ngModel)]="thisUser.phoneNumber">
-          <mat-hint
-            *ngIf="!((phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)) && phoneNumber.errors?.pattern)">
-            Optional
-          </mat-hint>
-          <mat-hint
-            *ngIf="(phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)) && phoneNumber.errors?.pattern">
-            Phone number can only contain numbers.
-          </mat-hint>
-        </mat-form-field>
-      </div>
-      </div>
-      <div class="mx-5 my-4 justify-content-end d-flex px-5">
-        <button mat-raised-button color="primary" class="px-3" style="height: 45px!important;">Update Profile</button>
-      </div>
-    </form>
-
-  </mat-card>
+    </mat-card>
+  </div>
 </div>

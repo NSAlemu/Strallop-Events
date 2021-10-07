@@ -1,0 +1,25 @@
+<div class="mat-elevation-z1 event-support-image-container" (click)="openDialog()"
+     style="background-color: white" [style.width]="size+'px'" [style.height]="(size)+'px'">
+  <div *ngIf="!background || background.length===0">
+    <div class="d-flex justify-content-center">
+      <mat-icon class="event-support-image-icon" style="color:blue;" [style.font-size]="(size/60)+'em'" [style.width]="(size/4)+'px'"
+                [style.height]="(size/4)+'px'">image
+      </mat-icon>
+    </div>
+    <div  style="width: 100%">
+      <h6 [style.padding-top]="size<250?0: '15px'" [style.font-size]="size<250?'0.8em!important': '1em'"
+          style="color:black!important;text-align: center; margin-block: 5px !important">
+        Click to change image</h6>
+      <p [class.d-none]="size<250" style="text-align: center; margin-block: 0 !important; font-size: small">JPEG or PNG, less than
+        10MB </p>
+    </div>
+  </div>
+  <div *ngIf="background && background.length>0" class="event-image" style="background-size: contain;"
+       [ngStyle]="{'background-image': 'url('+background+')'}">
+    <div class="event-support-image-floating-container">
+<!--      <mat-icon matRipple class="event-support-image-floating-edit">edit</mat-icon>-->
+      <mat-icon matRipple class="event-support-image-floating-delete" (click)="clearImage(); $event.stopPropagation()">delete_outline</mat-icon>
+    </div>
+  </div>
+</div>
+

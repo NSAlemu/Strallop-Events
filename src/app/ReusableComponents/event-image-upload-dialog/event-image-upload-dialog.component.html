@@ -1,0 +1,48 @@
+<div class="h-100 position-relative">
+  <input type="file" #uploadInput (change)="fileChangeEvent($event)"/>
+
+  <div class="row mh-100">
+    <div class="col-7 ">
+
+      <div *ngIf="!croppedImage && data.background.length===0" class="mat-elevation-z1 event-support-image-container"
+           style="height: 60vh">
+        <mat-icon class="event-support-image-icon" style="height: 80px;width: 80px;font-size: 5em;">image
+        </mat-icon>
+      </div>
+      <div *ngIf="!croppedFile && data.background.length>0">
+        <img src="{{data.background}}" style=" width: 100vw;max-width: 100%; object-fit: fill"/>
+      </div>
+      <image-cropper style="height: 60vh;max-width: 100%"
+                     [imageChangedEvent]="imageChangedEvent"
+                     [maintainAspectRatio]="true"
+                     [aspectRatio]="1"
+                     format="png"
+                     (imageCropped)="imageCropped($event)"
+                     (imageLoaded)="imageLoaded()"
+                     (cropperReady)="cropperReady()"
+                     (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+
+    </div>
+
+    <div class="col-5">
+      <img [src]="croppedImage" style="max-width: 100%"/>
+      <img *ngIf="!croppedImage && data.background.length>0" [src]="data.background" style="max-width: 100%"/>
+      <div *ngIf="!croppedImage && data.background.length===0" class="mat-elevation-z1 event-support-image-container">
+        <mat-icon class="event-support-image-icon" style="width: 60px;height: 60px;font-size: 3.4em;">image
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+  <div style="width:100%;position:absolute;bottom: 0">
+    <mat-divider></mat-divider>
+    <div class="w-100 d-flex align-items-center justify-content-end mt-3">
+      <div>
+        <button mat-stroked-button class="mx-1" [mat-dialog-close]>Cancel</button>
+        <button mat-raised-button color="primary"
+                [mat-dialog-close]="{base64:croppedImage? croppedImage:'', file: croppedFile}" class="mx-1">Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
