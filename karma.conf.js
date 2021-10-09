@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/Fichach-Events'),
+      dir: require('path').join(__dirname, './coverage/Strallop'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -1,14 +1,14 @@
 <div class="px-lg-5 px-md-3 ">
   <div class="content-header mx-lg-3 my-4">
     <div class="d-flex mb-2 ">
-      <h2>Close Account</h2>
+      <h2>Delete Account</h2>
     </div>
   </div>
 
-  <form #loginGroup='ngForm' (ngSubmit)="loginGroup.valid  && closeAccount()" class="row">
+  <form #loginGroup='ngForm' (ngSubmit)="loginGroup.valid  && closeAccount()" class="row wide-content">
     <div class="col-lg-7 col-md-12">
       <div >
-        <mat-label class="top-label">Type: "CLOSE ACCOUNT"</mat-label>
+        <mat-label class="top-label">Type: "DELETE ACCOUNT"</mat-label>
         <mat-form-field appearance="outline" class="w-100" >
           <input type="text" #password="ngModel" matInput required name="password"
                  [(ngModel)]="closeAccountConfirmation">>

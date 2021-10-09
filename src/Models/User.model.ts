@@ -107,7 +107,7 @@ export class UserModel {
     user.set('username', newUser.username);
     if (newUser.id === Parse.User.current()!.id)
       user.set('email', newUser.email);
-    user.set('phone', newUser.phoneNumber);
+    user.set('phone', newUser.phoneNumber+'');
     if (profileImg) {
       user.set('profileImg', await new Parse.File('profileImg.png', profileImg).save());
     } else if ((!profileImageUrl || profileImageUrl.length === 0) &&

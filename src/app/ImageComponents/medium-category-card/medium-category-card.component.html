@@ -20,10 +20,10 @@
       <div class="col-lg-auto col-md-auto col-sm-auto col-8" style=" z-index: 500; margin-bottom: 40px">
         <p class="mb-1 mt-0 mt-lg-2 mt-md-2 mt-sm-1" style="color: white; font-size: 15px;">{{carouselItem.name}}</p>
         <p
-          style="margin-bottom:5px;color: #6c6cd0; font-size: 12px; font-weight: 400"> {{carouselItem.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
+          style="margin-bottom:5px;color: #9797e1; font-size: 12px; font-weight: 400"> {{carouselItem.startDate | date:'EEEE, MMMM d, h:mm a'}}</p>
         <p class=" mb-2" style="color: #ececec; font-size: 13px; font-weight: 400">{{getLocation(carouselItem)}}</p>
-        <p class=" mb-1" style="color: #ececec; font-size: 14px; font-weight: 600">
-          <span style="color: #ececec; font-size: 13px; font-weight: 400">Starting from</span> Br. 25 </p>
+        <p class=" mb-1" style="color: #ececec; font-size: 14px; font-weight: 600" *ngIf="getMinPrice()">
+          <span style="color: #ececec; font-size: 13px; font-weight: 400">Starting from</span> {{getMinPrice()}} </p>
       </div>
     </div>
 

@@ -39,7 +39,9 @@ h6 {
 ::ng-deep .mat-form-field-wrapper {
   padding-bottom: 0 !important;
 }
-
+.top-label{
+  color: #383838;
+}
 .show-close {
 }
 

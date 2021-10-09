@@ -48,13 +48,13 @@
               <div class="col-12 col-lg-6 col-md-6">
                 <mat-label class="top-label">Email</mat-label>
                 <mat-form-field appearance="outline" style="padding-right: 2px">
-                  <input matInput name="email">
+                  <input matInput name="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 </mat-form-field>
               </div>
               <div class="col-12 col-lg-6 col-md-6">
                 <mat-label class="top-label">Phone Number</mat-label>
                 <mat-form-field style="padding-left: 2px" appearance="outline">
-                  <input required matInput name="phoneNumber">
+                  <input required  pattern="^[1-9]\d*$" matInput name="phoneNumber">
                 </mat-form-field>
               </div>
             </div>

@@ -16,7 +16,7 @@ export class SettingAccountCloseComponent implements OnInit {
   }
 
   closeAccount() {
-    if(this.closeAccountConfirmation.toLocaleUpperCase() === "CLOSE ACCOUNT"){
+    if(this.closeAccountConfirmation.toLocaleUpperCase() === "DELETE ACCOUNT"){
       UserModel.closeAccount(this.confirmPassword)
     }
   }

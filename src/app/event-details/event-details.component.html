@@ -25,9 +25,9 @@
       <div class="col-12 d-block d-md-none my-4 px-lg-3">
         <p class="mb-1">
         <span *ngIf="event.tickets.length>0">
-          Tickets Br. {{getMinPrice()}}
-          <span *ngIf="event.tickets.length>1">- Br. {{getMaxPrice()}}</span></span>
-          <span *ngIf="event.tickets.length===0">Tickets arn'tt posted yet. Check back later</span>
+          Tickets: {{getMinPrice()}}
+          <span *ngIf="event.tickets.length>1 && getMaxPrice()">{{getMaxPrice()}}</span></span>
+          <span *ngIf="event.tickets.length===0">Tickets aren't posted yet. Check back later</span>
         </p>
         <button mat-raised-button color="primary" class="w-100 big-action-button" (click)="openTicketDialog()">Get
           Tickets
@@ -40,8 +40,8 @@
       <div class="col-12 col-lg-4 col-md-4 d-none d-md-block px-lg-3">
         <p class="mb-1">
          <span *ngIf="event.tickets.length>0">
-                  Tickets Br. {{getMinPrice()}}
-           <span *ngIf="event.tickets.length>1">- Br. {{getMaxPrice()}}</span></span>
+                  Tickets {{getMinPrice()}}
+           <span *ngIf="event.tickets.length>1">{{getMaxPrice()}}</span></span>
           <span *ngIf="event.tickets.length===0"
                 style="font-size: 0.8em">Tickets aren't posted yet. Check back later</span>
         </p>
@@ -52,3 +52,4 @@
       </div>
     </div>
   </div>
+</div>

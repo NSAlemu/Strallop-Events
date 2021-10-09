@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventInterface, EventWebInterface} from "../../../Models/EventsModel.model";
+import {FormatAddress} from "../../Util/shared";
 
 @Component({
   selector: 'app-medium-category-card',
@@ -15,13 +16,22 @@ export class MediumCategoryCardComponent implements OnInit {
   }
 
   getLocation(carouselItem: EventWebInterface) {
-    let locName = '';
-    locName += carouselItem.address.name ? ', '+carouselItem.address.name : '';
-    locName += carouselItem.address.address1 ? ', '+carouselItem.address.address1 : '';
+    return FormatAddress(carouselItem.address)? FormatAddress(carouselItem.address):'';
+  }
 
-    if(locName.length===0){
-      locName = 'Lafto Mall'
+  getMinPrice() {
+    let minPrice = Infinity;
+    if(!this.carouselItem.tickets || this.carouselItem.tickets.length ===0){
+      return null
     }
-    return locName;
+    this.carouselItem.tickets.forEach(ticket=>{
+      if(ticket.price<minPrice){
+        minPrice = ticket.price;
+      }
+    })
+    if(minPrice<=0){
+      return 'Free'
+    }
+    return minPrice;
   }
 }

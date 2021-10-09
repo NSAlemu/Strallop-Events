@@ -27,7 +27,7 @@
                   <mat-icon matPrefix style="margin-right: 12px; color: #b0b0b0">
                     email
                   </mat-icon>
-                  <input matInput required name="email" [(ngModel)]="email"   placeholder="Email" style="color: white">
+                  <input matInput required name="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="email"   placeholder="Email" style="color: white">
                 </mat-form-field>
               </div>
             </div>

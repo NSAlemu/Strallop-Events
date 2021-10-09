@@ -6,7 +6,7 @@
                    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                    [mode]="(isHandset$ | async) ? 'over' : 'side'"
                    [opened]="(isHandset$ | async) === false"
-                   style="margin-top: 67px; background-color: #323638; color: white">
+                   style="margin-top: 67px; background-color: #1b1d1e; color: white">
         <mat-toolbar class="mat-elevation-z1 my-3 py-4" style="color: white; border-bottom-color: white">Account Settings</mat-toolbar>
         <mat-nav-list>
           <a mat-list-item routerLink="/settings/account-info"
@@ -20,7 +20,7 @@
             <p routerLinkActive="active-sidenav-p">Close Account</p></a>
         </mat-nav-list>
       </mat-sidenav>
-      <mat-sidenav-content style="padding-top: 68px">
+      <mat-sidenav-content style="background-color:#323638; padding-top: 68px">
         <ng-content style="background-color:green;overflow:auto;height: 20px"></ng-content>
         <!-- Add Content Here -->
       </mat-sidenav-content>

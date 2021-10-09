@@ -1,9 +1,9 @@
-<mat-toolbar color="primary" class="mat-elevation-z2" style="position: fixed;
+<mat-toolbar color="primary" class="mat-elevation-z2" style="position: fixed; box-shadow: none!important;
 padding-right: 0 !important;
     position: -webkit-sticky; /* For macOS/iOS Safari */
     top: 0; /* Sets the sticky toolbar to be on top */
-    background-color: #151414;
-    height: 65px;
+background-color: #1b1d1e ;
+   height: 65px;
     z-index: 1000;">
   <button
     type="button"
@@ -29,10 +29,7 @@ padding-right: 0 !important;
       </a>
     </div>
     <div *ngIf="currentUser">
-      <a routerLink="/m">
-        <button mat-button color="" style="font-size:0.7em; color: white; font-weight: 500">Manage Events</button>
-      </a>
-      <button mat-button class="w-auto px-4" [matMenuTriggerFor]="menu" style="background-color: black"
+      <button mat-button class="w-auto px-4" [matMenuTriggerFor]="menu"
               aria-label="Example icon-button with a menu">
         <div class="d-flex align-items-center justify-content-center ">
           <mat-icon *ngIf="!currentUserImg  " style="z-index:1000;color:#e7ebef; font-size: 30px; padding: 0" inline>
@@ -53,16 +50,16 @@ padding-right: 0 !important;
 
       </button>
       <mat-menu #menu="matMenu">
-        <a routerLink="/settings">
-          <button mat-menu-item>
-            <mat-icon>settings</mat-icon>
-            <span>Settings</span>
-          </button>
-        </a>
-        <a routerLink="/settings/account">
+        <a routerLink="/settings/account-info">
           <button mat-menu-item>
             <mat-icon>person</mat-icon>
             <span>Account</span>
+          </button>
+        </a>
+        <a href="https://manage.strallop.com" *ngIf="hasOrganization">
+          <button mat-menu-item>
+            <mat-icon>backup_table</mat-icon>
+            <span>Manage Events</span>
           </button>
         </a>
         <button mat-menu-item (click)="logout()" type="button">
@@ -73,4 +70,4 @@ padding-right: 0 !important;
     </div>
   </div>
 </mat-toolbar>
-<mat-divider style="background: rgb(255,183,0); height: 0.5px"></mat-divider>
+<!--<mat-divider style="background: rgb(255,183,0); height: 0.5px"></mat-divider>-->

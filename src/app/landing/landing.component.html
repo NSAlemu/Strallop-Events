@@ -3,11 +3,16 @@
   <app-large-event-card-skeleton *ngIf="featuredEvents.length===0"></app-large-event-card-skeleton>
   <div class="pt-5 mt-3 w-100">
     <div class=" ">
-      <div class="d-flex no-scrollbar overflow-auto" *ngIf="featuredEvents.length>0">
-        <app-large-event-card *ngFor="let carousel of featuredEvents;let i = index"
-                              [style.padding-left]="i==0?'25px':''"
-                              [carouselItem]="carousel" routerLink="events/{{carousel.id!}}"></app-large-event-card>
+      <div style="margin-right: 50%; width: 100%">
+        <h1 class="text-center">Welcome to Strallop Events</h1>
+        <p class="text-center" style="color: #cccccc">We are still in beta but we would love to hear from you</p>
       </div>
+
+<!--      <div class="d-flex no-scrollbar overflow-auto" *ngIf="featuredEvents.length>0">-->
+<!--        <app-large-event-card *ngFor="let carousel of featuredEvents;let i = index"-->
+<!--                              [style.padding-left]="i==0?'25px':''"-->
+<!--                              [carouselItem]="carousel" routerLink="events/{{carousel.id!}}"></app-large-event-card>-->
+<!--      </div>-->
 
       <div class=" mt-5" style="width: 1272px; max-width: 100vw;margin: 5px auto 16px;padding: 0 16px;">
         <h5 class="fw-bold mt-4">Upcoming Events</h5>

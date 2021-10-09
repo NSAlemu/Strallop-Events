@@ -23,12 +23,13 @@ export class ToolbarComponent implements OnInit {
     );
   currentUser:Parse.User|undefined = UserModel.getCurrentUser();
   currentUserImg='';
-
+  hasOrganization = false;
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private snackBar: MatSnackBar) {
   }
 
   async ngOnInit() {
     this.currentUser = UserModel.getCurrentUser()? await UserModel.getCurrentUser().fetch(): undefined;
+    this.hasOrganization = !!this.currentUser!.get('organization')
     if(this.currentUser)
     this.currentUserImg = !this.currentUser.get('profileImg') || this.currentUser.get('profileImg') == null ? undefined : this.currentUser.get('profileImg')
   }

@@ -99,15 +99,19 @@ export class EventDetailsComponent implements OnInit {
     if(minPrice<=0){
       return 'Free'
     }
-    return minPrice;
+    return  ' Br. '+minPrice;
   }
   getMaxPrice() {
+    let minPrice = Infinity;
     let maxPrice = 0;
     this.event.tickets.forEach(ticket=>{
+      if(ticket.price<minPrice){
+        minPrice = ticket.price;
+      }
       if(ticket.price>maxPrice){
         maxPrice = ticket.price;
       }
     })
-    return maxPrice;
+    return maxPrice > minPrice ? ' - '+maxPrice: null;
   }
 }

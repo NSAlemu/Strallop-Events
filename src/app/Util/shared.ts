@@ -49,19 +49,19 @@ export function GetFullDate(date: Date): string | null {
 
 export function FormatAddress(address: AddressInterface) {
   let formattedAddress = '';
-  formattedAddress += address.name.length > 0 ? address.name.length : ''
-  formattedAddress += formattedAddress.length > 0 && address.address1.length > 0 ? ', ' : ''
+  formattedAddress +=  address.name  && address.name.length > 0 ? address.name : ''
+  formattedAddress += formattedAddress.length > 0  && address.address1 && address.address1.length > 0 ? ', ' : ''
 
-  formattedAddress += address.address1.length > 0 ? address.address1.length : ''
-  formattedAddress += formattedAddress.length > 0 && address.address2.length > 0 ? ', ' : ''
+  formattedAddress += address.address1.length > 0 ? address.address1 : ''
+  formattedAddress += formattedAddress.length > 0  && address.address2 && address.address2.length > 0 ? ', ' : ''
 
-  formattedAddress += address.address2.length > 0 ? address.address2.length : ''
-  formattedAddress += formattedAddress.length > 0 && address.city.length > 0 ? ', ' : ''
+  formattedAddress += address.address2.length > 0 ? address.address2 : ''
+  formattedAddress += formattedAddress.length > 0 && address.city && address.city.length > 0 ? ', ' : ''
 
-  formattedAddress += address.city.length > 0 ? address.city.length : ''
-  formattedAddress += formattedAddress.length > 0 && address.country.length > 0 ? ', ' : ''
+  formattedAddress += address.city.length > 0 ? address.city : ''
+  formattedAddress += formattedAddress.length > 0 && address.country && address.country.length > 0 ? ', ' : ''
 
-  formattedAddress += address.country.length > 0 ? address.country.length : ''
+  formattedAddress += address.country && address.country.length > 0   ? address.country : ''
 
   return formattedAddress;
 }

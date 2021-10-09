@@ -7,7 +7,7 @@
   <mat-progress-bar *ngIf="loading" mode="indeterminate" color="primary"
                     style="position: sticky; top: 0; z-index: 100"></mat-progress-bar>
   <div class="wide-content" role="main">
-    <mat-card style="background-color :#1b1d1e;">
+    <div>
       <form #loginGroup='ngForm' (ngSubmit)="loginGroup.valid  && updateProfile()" appPasswordMatchValidation>
         <h4>Profile Image</h4>
         <div class="col-auto p-2" style="cursor:pointer;">
@@ -86,6 +86,6 @@
       </div>
       </form>
 
-    </mat-card>
+    </div>
   </div>
 </div>

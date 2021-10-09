@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Fichach-Events": {
+    "Strallop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": ["crypto"],
-            "outputPath": "dist/Fichach-Events",
+            "outputPath": "dist/Strallop",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Fichach-Events:build:production"
+              "browserTarget": "Strallop:build:production"
             },
             "development": {
-              "browserTarget": "Fichach-Events:build:development"
+              "browserTarget": "Strallop:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Fichach-Events:build"
+            "browserTarget": "Strallop:build"
           }
         },
         "test": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "Fichach-Events"
+  "defaultProject": "Strallop"
 }
